@@ -1,1 +1,22 @@
-/* You can add global styles to this file, and also import other style files */
+html{
+    background-image: url("assets/sk.jpg");
+}
+
+.container{
+    background-color: rgb(220, 220, 158);
+}
+
+body{
+    background-image: url("assets/sk.jpg");
+}
+
+.btn-kkout{
+    background-color: rgb(183, 184, 97);
+    color:white;
+    transition-duration: 0.1s;
+}
+
+.btn-kkout:hover {
+    background-color: white;
+    color: rgb(183, 184, 97);
+}

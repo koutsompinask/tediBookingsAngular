@@ -1,0 +1,35 @@
+<nav id="myNavbar" class="navbar navbar-dark bg-warning mb-3" >
+    <div class="container-fluid justify-content-between">
+        <a class="navbar-brand" [routerLink]="['home']">TediBookings</a>
+        <div id="navbarLoginSignin">
+            <button id="loginButton" class="btn btn-kkout btn-lg mx-2 p-1">
+                <a class="px-2 nav-link" aria-current="page" [routerLink]="['login']">Log-In</a>
+            </button>
+            <button id="signinButton" class="btn btn-kkout btn-lg p-1">
+                <a class="px-2 nav-link" aria-current="page" [routerLink]="['signup']">Sign-Up</a>
+            </button>
+        </div>
+    </div>
+</nav>
+<!-- 
+<div *ngIf="isLoggedIn()">
+    <div class="container-fluid">
+        <a class="navbar-brand" [routerLink]="['home']">TediBookings</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarAdmin" aria-controls="navbarAdmin" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarAdmin">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="px-2 nav-link" aria-current="page" [routerLink]="">Approve Users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="px-2 nav-link" aria-current="page" [routerLink]="">Check Bookings</a>
+                    <li>
+                    </ul>
+            <button id="logoutButton" class="btn btn-lg p-1" (click)="logout()">
+            <a class="px-2 nav-link" aria-current="page" [routerLink]="['home']">Log Out</a>
+            </button>
+        </div>
+    </div>
+</div> -->
