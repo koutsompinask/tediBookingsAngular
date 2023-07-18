@@ -3,4 +3,5 @@ export class LoginResponce{
     username: string;
     refreshToken: string;
     expiresAt: Date;
+    role : string;
 }

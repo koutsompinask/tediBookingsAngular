@@ -23,12 +23,15 @@ export class AuthService {
       }
     
     public logIn( cred : UserLogInDto ) {
+        console.log(cred);
+        this.localStorage.clear();
         return this.http.post<LoginResponce>(`${this.apiUrl}/auth/login`,cred)
             .pipe(map(data=> {
                 this.localStorage.store('authToken', data.authToken);
                 this.localStorage.store('username' , data.username);
                 this.localStorage.store('refreshToken', data.refreshToken);
                 this.localStorage.store('expiresAt',data.expiresAt);
+                this.localStorage.store('role',data.role);
             }));
     }
 
@@ -42,6 +45,10 @@ export class AuthService {
 
     getUsername(){
         return this.localStorage.retrieve('username');
+    }
+
+    getRole(){
+        return this.localStorage.retrieve('role');
     }
 
     refreshToken() {

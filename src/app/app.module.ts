@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SearchComponent } from './components/search/search.component';
-import { UsersComponent } from './components/users/users.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { ErrorComponent } from './components/error/error.component';
 import { LoginComponent } from './components/auth/login/login.component';
@@ -15,6 +14,7 @@ import { NgxWebstorageModule } from 'ngx-webstorage';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { ToastrModule } from 'ngx-toastr';
 import { TokenInterceptor } from './token-interceptor';
+import { AdminComponent } from './components/admin/admin.component';
 
 
 @NgModule({
@@ -22,10 +22,10 @@ import { TokenInterceptor } from './token-interceptor';
     AppComponent,
     NavbarComponent,
     SearchComponent,
-    UsersComponent,
     SignupComponent,
     ErrorComponent,
-    LoginComponent
+    LoginComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

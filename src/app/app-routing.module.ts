@@ -5,12 +5,14 @@ import { SignupComponent } from './components/auth/signup/signup.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ErrorComponent } from './components/error/error.component';
 import { LoginComponent } from './components/auth/login/login.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 const appRoute: Routes = [
     {path: '', redirectTo: 'home' , pathMatch: 'full'},
     {path: 'signup', component: SignupComponent},
     {path: 'login', component: LoginComponent},
     {path: 'home', component: SearchComponent},
+    {path: 'admin', component: AdminComponent},
     {path: '**', component : ErrorComponent}
   ]
 @NgModule({

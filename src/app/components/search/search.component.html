@@ -3,11 +3,11 @@
     <hr>
     <div class="row">
         <div>
-            <form class="row align-items-center">
+            <form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="row align-items-center">
                 <div class="col-md-4" >
                     <div class="mb-0">
                         <label for="Location" class="text-secondary form-label">Location</label>
-                        <input type="text" class="form-control" id="location" >
+                        <input type="text" class="form-control" id="location" formControlName="location" >
                     </div>
                 </div>
                 <div class="col-md-2">
@@ -25,7 +25,7 @@
                 <div class="col-md-2">
                     <div class="mb-0">
                         <label for="People" class="text-secondary form-label">Number of guests</label>
-                        <input type="number" class="form-control" id="People" >
+                        <input type="number" class="form-control" id="People" formControlName="numPerson">
                     </div>
                 </div>
                 <div class="col-md-2">
