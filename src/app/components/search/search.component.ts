@@ -15,6 +15,7 @@ export class SearchComponent implements OnInit{
   constructor(private accServ: AccomodationsService){
     this.accServ.getAllRooms().subscribe(item =>{
       this.dump=item;
+      console.log("dump is ",this.dump);
     })
   }
 

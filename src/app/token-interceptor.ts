@@ -24,7 +24,6 @@ export class TokenInterceptor implements HttpInterceptor{
                     && error.status === 403) {
                     return this.handleAuthErrors(req, next);
                 } else {
-                    console.log("shit");
                     return throwError(error);
                 }
             }));
