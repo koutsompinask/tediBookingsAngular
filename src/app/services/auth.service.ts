@@ -1,11 +1,12 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { EventEmitter, Injectable } from "@angular/core";
 import { environment } from "src/environments/kkout.env";
 import { UserSignInDto } from "../dto/registerRequest";
 import { UserLogInDto } from "../dto/loginRequest";
 import { LoginResponce } from "../dto/loginResponce"
 import { LocalStorageService } from "ngx-webstorage";
 import { map, tap } from "rxjs";
+import { User } from "../model/user";
 
 @Injectable({
     providedIn: 'root'
@@ -13,6 +14,11 @@ import { map, tap } from "rxjs";
 export class AuthService {
 
     apiUrl:string =environment.apiHost ;
+    userEmitter = new EventEmitter();
+
+    raiseUserEmitterEvent(){
+        this.userEmitter.emit();
+    }
 
     constructor(private http : HttpClient ,private localStorage: LocalStorageService){}
 
@@ -32,7 +38,13 @@ export class AuthService {
                 this.localStorage.store('refreshToken', data.refreshToken);
                 this.localStorage.store('expiresAt',data.expiresAt);
                 this.localStorage.store('role',data.role);
+                this.raiseUserEmitterEvent();
             }));
+    }
+
+    public logOut(){
+        this.localStorage.clear();
+        this.raiseUserEmitterEvent();
     }
 
     getJwtToken(){
@@ -56,7 +68,7 @@ export class AuthService {
             refreshToken : this.getRefreshToken(),
             username : this.getUsername()
         }
-        return this.http.post<LoginResponce>(this.apiUrl,refreshTokenPayload)
+        return this.http.post<LoginResponce>(`${this.apiUrl}/auth/refresh`,refreshTokenPayload)
             .pipe(tap(response => {
                 this.localStorage.store('authToken',response.authToken);
                 this.localStorage.store('expiresAt',response.expiresAt);

@@ -1,0 +1,151 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="container col-md-6 p-4">
+            <h1 class="text-secondary text-center">Enlist an Accomodation</h1>
+            <form [formGroup]="enlistForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label class="text-secondary" for="name">name</label>
+                    <input type="text" class="form-control" id="name" 
+                    placeholder="create your accomodation name" formControlName="name" >
+                </div>
+                <div class="text-danger" *ngIf="!enlistForm.get('name')?.valid && enlistForm.get('name')?.touched">
+                    <small>name is mandatory</small>
+                </div>
+                <div class="form-group">
+                    <label class="text-secondary" for="location">Location</label>
+                    <input type="text" class="form-control" id="location" 
+                    placeholder="where are you located?" formControlName="location" >
+                </div>
+                <div class="text-danger" *ngIf="!enlistForm.get('location')?.valid && enlistForm.get('location')?.touched">
+                    <small>location is mandatory</small>
+                </div>
+                <div class="form-group">
+                    <label class="text-secondary" for="floor">Floor</label>
+                    <input type="number" class="form-control" id="floor" 
+                    placeholder="accomodation floor" formControlName="floor" >
+                </div>
+                <div class="text-danger" *ngIf="!enlistForm.get('floor')?.valid && enlistForm.get('floor')?.touched">
+                    <small>floor is mandatory</small>
+                </div>
+                <div class="form-group">
+                    <label class="text-secondary" for="price">Price Per Night</label>
+                    <input type="number" class="form-control" id="price" 
+                    placeholder="accomodation price" formControlName="price" >
+                </div>
+                <div class="text-danger" *ngIf="!enlistForm.get('price')?.valid && enlistForm.get('price')?.touched">
+                    <small>price is mandatory</small>
+                </div>
+                <div class="form-group">
+                    <label class="text-secondary" for="size">Size (in squeared m.)</label>
+                    <input type="number" class="form-control" id="size" 
+                    placeholder="accomodation size" formControlName="size" >
+                </div>
+                <div class="text-danger" *ngIf="!enlistForm.get('size')?.valid && enlistForm.get('size')?.touched">
+                    <small>size is mandatory</small>
+                </div>
+                <div class="form-group">
+                    <label class="text-secondary" for="maxPerson">Max person capacity</label>
+                    <input type="number" class="form-control" id="maxPerson" 
+                    placeholder="accomodation max person capacity" formControlName="maxPerson" >
+                </div>
+                <div class="text-danger" *ngIf="!enlistForm.get('maxPerson')?.valid && enlistForm.get('maxPerson')?.touched">
+                    <small>max person capacity is mandatory</small>
+                </div>
+                <div class="form-group">
+                    <label class="text-secondary" for="accTypeChoice">Accomodation type</label> 
+                    <div id="accTypeChoice">
+                        <span *ngFor="let a of accTypes">
+                            <input type="radio" formControlName="accType" id="{{a.id}}" value="{{a.id}}">
+                            <label class="mx-2 text-secondary" for="{{a.id}}">
+                                {{a.value}}
+                            </label>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="text-secondary" for="description">Description</label>
+                    <input type="text" class="form-control" id="description" 
+                    placeholder="create your description" formControlName="description" >
+                </div>
+                <div class="form-group">
+                    <h5 class="my-2 text-secondary">Accomodation's extra services</h5> 
+                    <div id="booleans">
+                        <div>
+                            <label class="text-secondary" for="wifiCheck">Wifi:</label>
+                            <input class="mx-2" type="radio" formControlName="wifi" id="wifiYes" value="true">
+                            <label class="form-check-label" class="text-secondary" for="wifiYes">
+                                yes
+                            </label>
+                            <input class="mx-2" type="radio" formControlName="wifi" id="wifiNo" value="false">
+                            <label class="form-check-label" class="text-secondary" for="wifiNo">
+                                no
+                            </label>
+                        </div>
+                        <div>
+                            <label class="text-secondary" for="heatCheck">Heat:</label>
+                            <input class="mx-2" type="radio" formControlName="heat" id="heatYes" value="true">
+                            <label class="form-check-label" class="text-secondary" for="heatYes">
+                                yes
+                            </label>
+                            <input class="mx-2" type="radio" formControlName="heat" id="heatNo" value="false">
+                            <label class="form-check-label" class="text-secondary" for="heatNo">
+                                no
+                            </label>
+                        </div>
+                        <div>
+
+                            <label class="text-secondary" for="kitchenCheck">Kitchen:</label>
+                            <input class="mx-2" type="radio" formControlName="kitchen" id="kitchenYes" value="true">
+                            <label class="form-check-label" class="text-secondary" for="kitchenYes">
+                                yes
+                            </label>
+                            <input class="mx-2" type="radio" formControlName="kitchen" id="kitchenNo" value="false">
+                            <label class="form-check-label" class="text-secondary" for="kitchenNo">
+                                no
+                            </label>
+                        </div>
+                        <div>
+
+                            <label class="text-secondary" for="tvCheck">Tv:</label>
+                            <input class="mx-2" type="radio" formControlName="tv" id="tvYes" value="true">
+                            <label class="form-check-label" class="text-secondary" for="tvYes">
+                                yes
+                            </label>
+                            <input class="mx-2" type="radio" formControlName="tv" id="tvNo" value="false">
+                            <label class="form-check-label" class="text-secondary" for="tvNo">
+                                no
+                            </label>
+                        </div>
+                        <div>
+                            <label class="text-secondary" for="parkingCheck">Parking:</label>
+                            <input class="mx-2" type="radio" formControlName="parking" id="parkingYes" value="true">
+                            <label class="form-check-label" class="text-secondary" for="parkingYes">
+                                yes
+                            </label>
+                            <input class="mx-2" type="radio" formControlName="parking" id="parkingNo" value="false">
+                            <label class="form-check-label" class="text-secondary" for="parkingNo">
+                                no
+                            </label>
+                        </div>
+                        <div>
+                            <label class="text-secondary" for="elevatorCheck">Elevator:</label>
+                            <input class="mx-2" type="radio" formControlName="elevator" id="elevatorYes" value="true">
+                            <label class="form-check-label" class="text-secondary" for="elevatorYes">
+                                yes
+                            </label>
+                            <input class="mx-2" type="radio" formControlName="elevator" id="elevatorNo" value="false">
+                            <label class="form-check-label" class="text-secondary" for="elevatorNo">
+                                no
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-lg btn-kkout mt-3">Enlist</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>

@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { ToastrModule } from 'ngx-toastr';
 import { TokenInterceptor } from './token-interceptor';
 import { AdminComponent } from './components/admin/admin.component';
+import { EnlistComponent } from './components/host/enlist/enlist.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { AdminComponent } from './components/admin/admin.component';
     SignupComponent,
     ErrorComponent,
     LoginComponent,
-    AdminComponent
+    AdminComponent,
+    EnlistComponent
   ],
   imports: [
     BrowserModule,

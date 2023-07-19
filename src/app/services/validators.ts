@@ -22,6 +22,24 @@ export function passwordMatchValidator():ValidatorFn{
     }
 }
 
+export function dateSearchValidator():ValidatorFn{
+    return (form:AbstractControl): ValidationErrors | null => {
+        const from : Date = form.get("from")?.value;
+        const to: Date = form.get("to")?.value;
+        if (from == null && to == null) return null;
+        if ((from == null && to != null) || (from!=null && to==null)) return { bothOrNone : true};   
+        const now: Date = new Date();
+        console.log(now,from,to);
+        if ( from > to ){
+            return {fromAfterTo : true}
+        }
+        else if (new Date(from)< now){
+            return {beforeToday : true}
+        }
+        else return null;
+    }
+}
+
 // export function emailUsedValidator(user : UserService): AsyncValidatorFn {
 //     return (control : AbstractControl) => {
 //         return user.findUserByEmail(control.value)

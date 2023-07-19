@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/kkout.env';
 import { SearchDto } from '../dto/searchRequest';
+import { EnlistDto } from '../dto/enlistRequest';
+import { Accomodation } from '../model/accomodation';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +14,11 @@ export class AccomodationsService {
 
   constructor(private http: HttpClient) { }
 
-  getAllRooms(search :SearchDto){
-    return this.http.get(`${this.apiUrl}/accomodation/getAll`);
+  enlist(enlistRequest : EnlistDto){
+    return this.http.post(`${this.apiUrl}/accomodation/enlist`,enlistRequest);
+  }
+
+  getAllRooms(search :SearchDto):Observable<Accomodation[]>{
+    return this.http.post<Accomodation[]>(`${this.apiUrl}/accomodation/getFiltered`,search);
   }
 }

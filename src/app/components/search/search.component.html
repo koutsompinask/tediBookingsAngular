@@ -2,36 +2,58 @@
     <h1 class="text-secondary mb-4">Search For An Accomodation</h1>
     <hr>
     <div class="row">
-        <div>
-            <form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="row align-items-center">
-                <div class="col-md-4" >
-                    <div class="mb-0">
-                        <label for="Location" class="text-secondary form-label">Location</label>
-                        <input type="text" class="form-control" id="location" formControlName="location" >
-                    </div>
+        <div class="col-md-3"></div>
+        <form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="col-md-6 align-items-center">
+            <div class="" >
+                <div class="mb-0">
+                    <label for="Location" class="text-secondary form-label">Location</label>
+                    <input type="text" class="form-control" id="location" formControlName="location" >
                 </div>
-                <div class="col-md-2">
+            </div>
+            <div formGroupName="dates">
+                <div class="">
                     <div class="mb-0">
                         <label for="DateFrom" class="text-secondary form-label">From</label>
-                        <input type="date" class="form-control" id="DateFrom" >
+                        <input type="date" class="form-control" id="DateFrom" formControlName="from">
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="">
                     <div class="mb-0">
                         <label for="DateTo" class="text-secondary form-label">To</label>
-                        <input type="date" class="form-control" id="DateTo" >
+                        <input type="date" class="form-control" id="DateTo" formControlName="to">
                     </div>
                 </div>
-                <div class="col-md-2">
-                    <div class="mb-0">
-                        <label for="People" class="text-secondary form-label">Number of guests</label>
-                        <input type="number" class="form-control" id="People" formControlName="numPerson">
-                    </div>
+            </div>
+            <div class="">
+                <div class="mb-0">
+                    <label for="People" class="text-secondary form-label">Number of guests</label>
+                    <input type="number" class="form-control" id="People" formControlName="numPerson">
                 </div>
-                <div class="col-md-2">
-                    <button type="submit" class="btn btn-kkout">Search</button>
+            </div>
+            <div class="">
+                <button type="submit" class="btn btn-kkout">Search</button>
+            </div>
+        </form>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-sm-6" *ngFor="let acc of searchResults">
+            <div class="card m-2">
+                <img src="" class="card-img-top" alt="accomodation image">
+                <div class="card-body">
+                    <h5 class="card-title">{{acc.name}}</h5>
+                    <p class="card-text">Floor: {{acc.floor}}</p>
+                    <p class="card-text">Price Per Night: {{acc.price}}</p>
+                    <p class="card-text">Max Persons: {{acc.maxPerson}}</p>
+                    <p class="card-text">Location: {{acc.location}}</p>
+                    <p class="card-text">Wifi: {{acc.wifi}}</p>
+                    <p class="card-text">Heat: {{acc.heat}}</p>
+                    <p class="card-text">Room Size: {{acc.size}}</p>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
