@@ -24,6 +24,9 @@
                     </div>
                 </div>
             </div>
+            <small class="text-danger" *ngIf="!isValidDate()">
+                Date to must be after from, and cant be past dates!
+            </small>
             <div class="">
                 <div class="mb-0">
                     <label for="People" class="text-secondary form-label">Number of guests</label>

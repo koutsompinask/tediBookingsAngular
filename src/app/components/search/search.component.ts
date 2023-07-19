@@ -48,4 +48,10 @@ export class SearchComponent implements OnInit{
     }
     );
   }
+
+  isValidDate(){
+    return (this.searchForm.get('dates')?.valid || 
+    !this.searchForm.get('dates.from')?.touched ||
+    !this.searchForm.get('dates.from')?.touched);
+  }
 }
