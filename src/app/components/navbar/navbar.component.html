@@ -24,9 +24,13 @@
                     <a class="px-2 nav-link" aria-current="page" [routerLink]="['admin']">Approve Users</a>
                 </li>
                 <li class="nav-item">
-                    <a class="px-2 nav-link" aria-current="page" [routerLink]="">Check Bookings</a>
+                    <a class="px-2 nav-link" aria-current="page" [routerLink]="['home']">Check Bookings</a>
                 <li>
             </ul>
+                <span class="px-2 text-light" aria-current="page" [routerLink]="['home']">
+                    <i class="text-light fa fa-user" aria-hidden="true"></i>
+                    Logged in as {{username}},{{role}}
+                </span>
                 <button id="logoutButton" class="btn btn-lg btn-kkout p-1" (click)="logout()">
                     <a class="px-2 nav-link" aria-current="page" >Log Out</a>
                 </button>
@@ -46,9 +50,92 @@
                     <a class="px-2 nav-link" aria-current="page" [routerLink]="['enlist']">Enlist Accomodation</a>
                 </li>
                 <li class="nav-item">
+                    <a class="px-2 nav-link" aria-current="page" [routerLink]="['hostAccs']">My Accomodations</a>
+                <li>
+                <li class="nav-item">
                     <a class="px-2 nav-link" aria-current="page" [routerLink]="">Check Bookings</a>
                 <li>
             </ul>
+            <span class="px-2 text-light" aria-current="page" [routerLink]="['home']">
+                <i class="text-light fa fa-user" aria-hidden="true"></i>
+                Logged in as {{username}},{{role}}
+            </span>
+            <button id="logoutButton" class="btn btn-lg btn-kkout p-1" (click)="logout()">
+                <a class="px-2 nav-link" aria-current="page" >Log Out</a>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<nav id="myNavbarRenter" class="navbar navbar-dark bg-warning mb-3 navbar-expand-md" *ngIf="role==='RENTER'">
+    <div class="container-fluid">
+        <a class="navbar-brand" [routerLink]="['home']">TediBookings</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHost" aria-controls="navbarHost" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarHost">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="px-2 nav-link" aria-current="page" [routerLink]="">My bookings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="px-2 nav-link" aria-current="page" [routerLink]="">{{username}}</a>
+                <li>
+            </ul>
+            <span class="px-2 text-light" aria-current="page" [routerLink]="['home']">
+                <i class="text-light fa fa-user" aria-hidden="true"></i>
+                Logged in as {{username}},{{role}}
+            </span>
+            <button id="logoutButton" class="btn btn-lg btn-kkout p-1" (click)="logout()">
+                <a class="px-2 nav-link" aria-current="page" >Log Out</a>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<nav id="myNavbarHostRenter" class="navbar navbar-dark bg-warning mb-3 navbar-expand-md" *ngIf="role==='HOST_AND_RENTER'">
+    <div class="container-fluid">
+        <a class="navbar-brand" [routerLink]="['home']">TediBookings</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHost" aria-controls="navbarHost" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarHost">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="px-2 nav-link" aria-current="page" [routerLink]="">Search For An Accomodation</a>
+                </li>
+                <li class="nav-item">
+                    <a class="px-2 nav-link" aria-current="page" [routerLink]="['enlist']">Enlist an Accomodation</a>
+                <li>
+                <li class="nav-item">
+                    <a class="px-2 nav-link" aria-current="page" [routerLink]="['home']">My Accomodations</a>
+                <li>
+                <li class="nav-item">
+                    <a class="px-2 nav-link" aria-current="page" [routerLink]="['enlist']">My Reservations</a>
+                <li>
+            </ul>
+            <span class="px-2 text-light" aria-current="page" [routerLink]="['home']">
+                <i class="text-light fa fa-user" aria-hidden="true"></i>
+                Logged in as {{username}},{{role}}
+            </span>
+            <button id="logoutButton" class="btn btn-lg btn-kkout p-1" (click)="logout()">
+                <a class="px-2 nav-link" aria-current="page" >Log Out</a>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<nav id="myNavbarHostRenter" class="navbar navbar-dark bg-warning mb-3 navbar-expand-md" *ngIf="role==='PENDING'">
+    <div class="container-fluid">
+        <a class="navbar-brand" [routerLink]="['home']">TediBookings</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHost" aria-controls="navbarHost" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarHost">
+            <span class="px-2 text-light" aria-current="page" [routerLink]="['home']">
+                <i class="text-light fa fa-user" aria-hidden="true"></i>
+                Logged in as {{username}},{{role}}
+            </span>
             <button id="logoutButton" class="btn btn-lg btn-kkout p-1" (click)="logout()">
                 <a class="px-2 nav-link" aria-current="page" >Log Out</a>
             </button>

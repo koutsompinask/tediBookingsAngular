@@ -38,6 +38,7 @@ export class AuthService {
                 this.localStorage.store('refreshToken', data.refreshToken);
                 this.localStorage.store('expiresAt',data.expiresAt);
                 this.localStorage.store('role',data.role);
+                this.localStorage.store('id',data.id);
                 this.raiseUserEmitterEvent();
             }));
     }
@@ -61,6 +62,10 @@ export class AuthService {
 
     getRole(){
         return this.localStorage.retrieve('role');
+    }
+
+    getId(){
+        return this.localStorage.retrieve('id');
     }
 
     refreshToken() {

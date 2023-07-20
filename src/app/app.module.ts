@@ -16,6 +16,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { TokenInterceptor } from './token-interceptor';
 import { AdminComponent } from './components/admin/admin.component';
 import { EnlistComponent } from './components/host/enlist/enlist.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { AccomodationsComponent } from './components/host/accomodations/accomodations.component';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { EnlistComponent } from './components/host/enlist/enlist.component';
     ErrorComponent,
     LoginComponent,
     AdminComponent,
-    EnlistComponent
+    EnlistComponent,
+    ProfileComponent,
+    AccomodationsComponent
   ],
   imports: [
     BrowserModule,

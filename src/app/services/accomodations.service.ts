@@ -21,4 +21,9 @@ export class AccomodationsService {
   getAllRooms(search :SearchDto):Observable<Accomodation[]>{
     return this.http.post<Accomodation[]>(`${this.apiUrl}/accomodation/getFiltered`,search);
   }
+
+  getRoomsByOwner(userId : number):Observable<Accomodation[]>{
+    return this.http.get<Accomodation[]>(`${this.apiUrl}/accomodation/getMine/${userId}`);
+  }
+
 }

@@ -7,9 +7,11 @@ import { ErrorComponent } from './components/error/error.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { EnlistComponent } from './components/host/enlist/enlist.component';
+import { AccomodationsComponent } from './components/host/accomodations/accomodations.component';
 
 const appRoute: Routes = [
     {path: '', redirectTo: 'home' , pathMatch: 'full'},
+    {path: 'hostAccs', component:AccomodationsComponent},
     {path: 'enlist',component : EnlistComponent},
     {path: 'signup', component: SignupComponent},
     {path: 'login', component: LoginComponent},
