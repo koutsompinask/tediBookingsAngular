@@ -8,6 +8,8 @@ export class Accomodation{
     maxPerson:number;
     accType:string;
     description : string;
+    availableFrom: Date;
+    availabeTo: Date;
     wifi:boolean;
 	heat:boolean;
 	kitchen:boolean;

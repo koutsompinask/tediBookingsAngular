@@ -5,6 +5,7 @@ import { environment } from 'src/environments/kkout.env';
 import { SearchDto } from '../dto/searchRequest';
 import { EnlistDto } from '../dto/enlistRequest';
 import { Accomodation } from '../model/accomodation';
+import { BookingDto } from '../dto/bookingRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +23,8 @@ export class AccomodationsService {
     return this.http.post<Accomodation[]>(`${this.apiUrl}/accomodation/getFiltered`,search);
   }
 
-  getRoomsByOwner(userId : number):Observable<Accomodation[]>{
-    return this.http.get<Accomodation[]>(`${this.apiUrl}/accomodation/getMine/${userId}`);
+  getRoomsByOwner():Observable<Accomodation[]>{
+    return this.http.get<Accomodation[]>(`${this.apiUrl}/accomodation/getMine`);
   }
 
 }

@@ -1,6 +1,8 @@
 export class EnlistDto{
     name:string;
     location:string;
+    availableFrom: Date;
+    availableTo: Date;
     floor:number;
     price:number;
     size:number;

@@ -12,10 +12,10 @@ import { AuthService } from 'src/app/services/auth.service';
 export class AccomodationsComponent implements OnInit{
   accomodations: Accomodation[];
 
-  constructor (private accomServ: AccomodationsService,private authServ : AuthService){}
+  constructor (private accomServ: AccomodationsService){}
 
   ngOnInit(): void {
-    this.accomServ.getRoomsByOwner(this.authServ.getId()).subscribe(data => {
+    this.accomServ.getRoomsByOwner().subscribe(data => {
       this.accomodations=data;
       console.log(this.accomodations);
     })  

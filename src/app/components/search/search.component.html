@@ -25,7 +25,7 @@
                 </div>
             </div>
             <small class="text-danger" *ngIf="!isValidDate()">
-                Date to must be after from, and cant be past dates!
+                Date to must be after from!
             </small>
             <div class="">
                 <div class="mb-0">
@@ -33,9 +33,12 @@
                     <input type="number" class="form-control" id="People" formControlName="numPerson">
                 </div>
             </div>
-            <div class="">
-                <button type="submit" class="btn btn-kkout">Search</button>
+            <div>
+                <button type="submit" class="my-2 btn btn-kkout">Search</button>
             </div>
+            <small class="text-danger" [hidden]="!invalidFormSubmit">
+                All fields are mandatory
+            </small>
         </form>
         <div class="col-md-3"></div>
     </div>
@@ -55,6 +58,7 @@
                     <p class="card-text">Wifi: {{acc.wifi}}</p>
                     <p class="card-text">Heat: {{acc.heat}}</p>
                     <p class="card-text">Room Size: {{acc.size}}</p>
+                    <button class="btn btn-kkout" (click)="book(acc.id)" *ngIf="isRenter() && isDatesFilled()">Reserve</button>
                 </div>
             </div>
         </div>

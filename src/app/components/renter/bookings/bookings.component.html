@@ -1,0 +1,28 @@
+<div class="container p-sm-3">
+    <div class="text-center">
+        <h1 class="text-secondary">My Bookings</h1>
+    </div>
+    <table class="table m-sm-0">
+    <thead>
+        <tr>
+        <th scope="col">Accomodation Name</th>
+        <th scope="col">From</th>
+        <th scope="col">To</th>
+        <th scope="col">Cancel</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let b of bookings">
+        <td>{{b.accName}}</td>
+        <td>{{dateConverter(b.from)}}</td>
+        <td>{{dateConverter(b.to)}}</td>
+        <td>
+            <button class="btn btn-sm btn-danger">
+                Cancel Booking
+            </button>
+        </td>
+        </tr>
+        <tr>
+    </tbody>
+    </table>
+</div>

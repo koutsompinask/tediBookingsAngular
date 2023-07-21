@@ -21,7 +21,7 @@ export class TokenInterceptor implements HttpInterceptor{
         if (jwtToken) {
             return next.handle(this.addToken(req, jwtToken)).pipe(catchError(error => {
                 if (error instanceof HttpErrorResponse
-                    && error.status === 403) {
+                    && (error.status === 403 || error.status === 500)) {
                     return this.handleAuthErrors(req, next);
                 } else {
                     return throwError(error);
@@ -45,6 +45,7 @@ export class TokenInterceptor implements HttpInterceptor{
 
             return this.authService.refreshToken().pipe(
                 switchMap((refreshTokenResponce: LoginResponce) => {
+                    console.log(refreshTokenResponce);
                     this.isTokenRefreshing = false;
                     this.refreshTokenSubject.next(refreshTokenResponce.authToken);
                     return next.handle(this.addToken(req,refreshTokenResponce.authToken));

@@ -26,6 +26,8 @@ export class EnlistComponent implements OnInit{
     this.enlistForm = new FormGroup({
       name : new FormControl(null,Validators.required),
       location : new FormControl(null,Validators.required),
+      availableFrom : new FormControl(null,Validators.required),
+      availableTo : new FormControl(null,Validators.required),
       floor: new FormControl(null,[Validators.required,charsDisallowedValidator(/[^0-9]/)]),
       price: new FormControl(null,[Validators.required,charsDisallowedValidator(/[^0-9]/)]),
       size : new FormControl(null,[Validators.required,charsDisallowedValidator(/[^0-9]/)]),
@@ -39,6 +41,8 @@ export class EnlistComponent implements OnInit{
       parking : new FormControl('false',Validators.required),
       elevator : new FormControl('false',Validators.required)
     });
+    var today = new Date().toISOString().split('T')[0];
+    document.getElementById('availableFrom').setAttribute('min',today);
   }
 
   onSubmit(){
@@ -46,6 +50,8 @@ export class EnlistComponent implements OnInit{
     this.enlistRequest={
       name: this.enlistForm.get('name')?.value,
       location: this.enlistForm.get('location')?.value,
+      availableFrom: this.enlistForm.get('availableFrom')?.value,
+      availableTo: this.enlistForm.get('availableTo')?.value,
       floor: this.enlistForm.get('floor')?.value,
       price: this.enlistForm.get('price')?.value,
       size: this.enlistForm.get('size')?.value,
