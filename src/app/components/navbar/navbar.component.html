@@ -72,8 +72,6 @@
                 <li class="nav-item">
                     <a class="px-2 nav-link" aria-current="page" [routerLink]="['search']">Search For Accomodation</a>
                 </li>
-            </ul>
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="px-2 nav-link" aria-current="page" [routerLink]="['renterBooks']">My bookings</a>
                 </li>
@@ -121,14 +119,19 @@
     </div>
 </nav>
 
-<nav id="myNavbarHostRenter" class="navbar navbar-dark bg-warning mb-3 navbar-expand-md" *ngIf="role==='PENDING'">
+<nav id="myNavbarPending" class="navbar navbar-dark navbar-expand-md bg-warning mb-3" *ngIf="role==='PENDING'">
     <div class="container-fluid">
         <a class="navbar-brand" [routerLink]="['home']">TediBookings</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHost" aria-controls="navbarHost" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPending" aria-controls="navbarPending" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarHost">
-            <span class="px-2 text-light" aria-current="page">
+        <div class="collapse navbar-collapse" id="navbarPending">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="px-2 nav-link" aria-current="page" [routerLink]="['search']">Search For An Accomodation</a>
+                </li>
+            </ul>
+            <span class="px-2 text-light" aria-current="page" [routerLink]="['home']">
                 <i class="text-light fa fa-user" aria-hidden="true"></i>
                 Logged in as {{username}},{{role}}
             </span>

@@ -23,9 +23,7 @@ export class AuthService {
     constructor(private http : HttpClient ,private localStorage: LocalStorageService){}
 
     public registerUser( user : UserSignInDto){
-        console.log(user);
         return this.http.post(`${this.apiUrl}/auth/signup`,user);
-          
       }
     
     public logIn( cred : UserLogInDto ) {

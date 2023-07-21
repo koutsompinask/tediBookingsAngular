@@ -37,7 +37,6 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.signupForm);
     this.registerRequest={
       username:this.signupForm.get('username')?.value,
       firstName:this.signupForm.get('firstName')?.value,
