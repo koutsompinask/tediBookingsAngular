@@ -19,6 +19,7 @@ import { EnlistComponent } from './components/host/enlist/enlist.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AccomodationsComponent } from './components/host/accomodations/accomodations.component';
 import { BookingsComponent } from './components/renter/bookings/bookings.component';
+import { HomeComponent } from './components/home/home.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { BookingsComponent } from './components/renter/bookings/bookings.compone
     EnlistComponent,
     ProfileComponent,
     AccomodationsComponent,
-    BookingsComponent
+    BookingsComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

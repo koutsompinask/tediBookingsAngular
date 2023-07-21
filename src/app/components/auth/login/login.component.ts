@@ -28,14 +28,12 @@ export class LoginComponent implements OnInit{
   }
 
   onSubmit(){
-    console.log(this.loginForm);
     this.loginReq={
       username : this.loginForm.get('username')?.value,
       password : this.loginForm.get('password')?.value
     };
 
     this.authServ.logIn(this.loginReq).subscribe(data => {
-      console.log(data);
       this.router.navigate(['/home'],
         {queryParams: {registered : true}});
     }, (er) => {

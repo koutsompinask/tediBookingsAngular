@@ -1,1 +1,24 @@
-<p *ngFor="let ac of accomodations">accomodations works!{{ac.name}}</p>
+<div class="container p-sm-3">
+    <div class="text-center">
+        <h1 class="text-secondary">My Accomodations</h1>
+    </div>
+    <table class="table m-sm-0">
+    <thead>
+        <tr>
+        <th scope="col">Accomodation</th>
+        <th scope="col">From</th>
+        <th scope="col">To</th>
+        <th scope="col">Cancel</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let acc of accomodations">
+        <td>{{acc.name}}</td>
+        <td>{{acc.location}}</td>
+        <td>{{acc.floor}}</td>
+        <td>{{acc.wifi}}</td>
+        </tr>
+        <tr>
+    </tbody>
+    </table>
+</div>

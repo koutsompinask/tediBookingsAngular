@@ -29,7 +29,6 @@ export class AuthService {
       }
     
     public logIn( cred : UserLogInDto ) {
-        console.log(cred);
         this.localStorage.clear();
         return this.http.post<LoginResponce>(`${this.apiUrl}/auth/login`,cred)
             .pipe(map(data=> {

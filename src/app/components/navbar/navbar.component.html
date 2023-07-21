@@ -23,9 +23,6 @@
                 <li class="nav-item">
                     <a class="px-2 nav-link" aria-current="page" [routerLink]="['admin']">Approve Users</a>
                 </li>
-                <li class="nav-item">
-                    <a class="px-2 nav-link" aria-current="page" [routerLink]="['home']">Check Bookings</a>
-                <li>
             </ul>
                 <span class="px-2 text-light" aria-current="page" [routerLink]="['home']">
                     <i class="text-light fa fa-user" aria-hidden="true"></i>
@@ -52,9 +49,6 @@
                 <li class="nav-item">
                     <a class="px-2 nav-link" aria-current="page" [routerLink]="['hostAccs']">My Accomodations</a>
                 <li>
-                <li class="nav-item">
-                    <a class="px-2 nav-link" aria-current="page" [routerLink]="">Check Bookings</a>
-                <li>
             </ul>
             <span class="px-2 text-light" aria-current="page" [routerLink]="['home']">
                 <i class="text-light fa fa-user" aria-hidden="true"></i>
@@ -76,6 +70,11 @@
         <div class="collapse navbar-collapse" id="navbarRenter">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
+                    <a class="px-2 nav-link" aria-current="page" [routerLink]="['search']">Search For Accomodation</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
                     <a class="px-2 nav-link" aria-current="page" [routerLink]="['renterBooks']">My bookings</a>
                 </li>
             </ul>
@@ -90,7 +89,7 @@
     </div>
 </nav>
 
-<nav id="myNavbarHostRenter" class="navbar navbar-dark bg-warning mb-3 navbar-expand-md" *ngIf="role==='HOST_AND_RENTER'">
+<nav id="myNavbarHostRenter" class="navbar navbar-dark bg-warning mb-3 navbar-expand-lg" *ngIf="role==='HOST_AND_RENTER'">
     <div class="container-fluid">
         <a class="navbar-brand" [routerLink]="['home']">TediBookings</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHostRenter" aria-controls="navbarHostRenter" aria-expanded="false" aria-label="Toggle navigation">
@@ -99,13 +98,13 @@
         <div class="collapse navbar-collapse" id="navbarHostRenter">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="px-2 nav-link" aria-current="page" [routerLink]="">Search For An Accomodation</a>
+                    <a class="px-2 nav-link" aria-current="page" [routerLink]="['search']">Search For An Accomodation</a>
                 </li>
                 <li class="nav-item">
                     <a class="px-2 nav-link" aria-current="page" [routerLink]="['enlist']">Enlist an Accomodation</a>
                 <li>
                 <li class="nav-item">
-                    <a class="px-2 nav-link" aria-current="page" [routerLink]="['home']">My Accomodations</a>
+                    <a class="px-2 nav-link" aria-current="page" [routerLink]="['hostAccs']">My Accomodations</a>
                 <li>
                 <li class="nav-item">
                     <a class="px-2 nav-link" aria-current="page" [routerLink]="['renterBooks']">My Reservations</a>
@@ -129,7 +128,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarHost">
-            <span class="px-2 text-light" aria-current="page" [routerLink]="['home']">
+            <span class="px-2 text-light" aria-current="page">
                 <i class="text-light fa fa-user" aria-hidden="true"></i>
                 Logged in as {{username}},{{role}}
             </span>

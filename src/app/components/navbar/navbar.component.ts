@@ -20,7 +20,6 @@ export class NavbarComponent implements OnInit{
   ngOnInit(): void {
     this.username=this.authService.getUsername();
     this.role=this.authService.getRole();
-    console.log("entered",this.username);
     this.authService.userEmitter.subscribe(()=>{
       this.username=this.authService.getUsername();
       this.role=this.authService.getRole()

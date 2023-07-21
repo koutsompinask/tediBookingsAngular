@@ -9,6 +9,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { EnlistComponent } from './components/host/enlist/enlist.component';
 import { AccomodationsComponent } from './components/host/accomodations/accomodations.component';
 import { BookingsComponent } from './components/renter/bookings/bookings.component';
+import { HomeComponent } from './components/home/home.component';
 
 const appRoute: Routes = [
     {path: '', redirectTo: 'home' , pathMatch: 'full'},
@@ -17,7 +18,8 @@ const appRoute: Routes = [
     {path: 'renterBooks', component: BookingsComponent},
     {path: 'signup', component: SignupComponent},
     {path: 'login', component: LoginComponent},
-    {path: 'home', component: SearchComponent},
+    {path: 'search', component: SearchComponent},
+    {path: 'home', component: HomeComponent},
     {path: 'admin', component: AdminComponent},
     {path: '**', component : ErrorComponent}
   ]
