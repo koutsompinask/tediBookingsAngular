@@ -13,7 +13,11 @@
     </thead>
     <tbody>
         <tr *ngFor="let acc of accomodations">
-        <td>{{acc.name}}</td>
+        <td>
+            <a [routerLink]="['details']" [queryParams]="{id: acc.id}">
+                {{acc.name}}
+            </a>
+        </td>
         <td>{{acc.location}}</td>
         <td>{{acc.floor}}</td>
         <td>{{acc.wifi}}</td>

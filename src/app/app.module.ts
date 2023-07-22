@@ -20,7 +20,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { AccomodationsComponent } from './components/host/accomodations/accomodations.component';
 import { BookingsComponent } from './components/renter/bookings/bookings.component';
 import { HomeComponent } from './components/home/home.component';
-
+import { AccomodationDetailsComponent } from './components/accomodation.details/accomodation.details.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,8 @@ import { HomeComponent } from './components/home/home.component';
     ProfileComponent,
     AccomodationsComponent,
     BookingsComponent,
-    HomeComponent
+    HomeComponent,
+    AccomodationDetailsComponent
   ],
   imports: [
     BrowserModule,

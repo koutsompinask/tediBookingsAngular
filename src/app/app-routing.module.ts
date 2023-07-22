@@ -10,10 +10,12 @@ import { EnlistComponent } from './components/host/enlist/enlist.component';
 import { AccomodationsComponent } from './components/host/accomodations/accomodations.component';
 import { BookingsComponent } from './components/renter/bookings/bookings.component';
 import { HomeComponent } from './components/home/home.component';
+import { AccomodationDetailsComponent } from './components/accomodation.details/accomodation.details.component';
 
 const appRoute: Routes = [
     {path: '', redirectTo: 'home' , pathMatch: 'full'},
     {path: 'hostAccs', component:AccomodationsComponent},
+    {path: 'hostAccs/details', component: AccomodationDetailsComponent},
     {path: 'enlist',component : EnlistComponent},
     {path: 'renterBooks', component: BookingsComponent},
     {path: 'signup', component: SignupComponent},

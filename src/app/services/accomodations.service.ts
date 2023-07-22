@@ -15,7 +15,7 @@ export class AccomodationsService {
 
   constructor(private http: HttpClient) { }
 
-  enlist(enlistRequest : EnlistDto){
+  enlist(enlistRequest : FormData){
     return this.http.post(`${this.apiUrl}/accomodation/enlist`,enlistRequest);
   }
 
@@ -25,6 +25,10 @@ export class AccomodationsService {
 
   getRoomsByOwner():Observable<Accomodation[]>{
     return this.http.get<Accomodation[]>(`${this.apiUrl}/accomodation/getMine`);
+  }
+
+  getRoomById(accid:number):Observable<Accomodation>{
+    return this.http.get<Accomodation>(`${this.apiUrl}/accomodation/get/${accid}`);
   }
 
 }

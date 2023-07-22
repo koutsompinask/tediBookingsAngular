@@ -5,24 +5,44 @@
             <h1 class="text-secondary text-center">Enlist an Accomodation</h1>
             <form [formGroup]="enlistForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
-                    <label class="text-secondary" for="name">name</label>
+                    <label class="text-secondary" for="name">Name</label>
                     <input type="text" class="form-control" id="name" 
                     placeholder="create your accomodation name" formControlName="name" >
                 </div>
                 <div class="text-danger" *ngIf="!enlistForm.get('name')?.valid && enlistForm.get('name')?.touched">
                     <small>name is mandatory</small>
                 </div>
+                <h3 class="mt-2 mb-0 text-secondary">
+                    Location information
+                </h3>
                 <div class="form-group">
-                    <label class="text-secondary" for="location">Location</label>
+                    <label class="text-secondary" for="location">Address</label>
                     <input type="text" class="form-control" id="location" 
-                    placeholder="where are you located?" formControlName="location" >
+                    placeholder="Country City Address" formControlName="location" >
                 </div>
                 <div class="text-danger" *ngIf="!enlistForm.get('location')?.valid && enlistForm.get('location')?.touched">
                     <small>location is mandatory</small>
                 </div>
                 <div class="form-group">
+                    <label class="text-secondary" for="locationMap">Add your exact location</label>
+                    <div class="map-container mt-0" id="locationMap">
+                        <div class="map-frame">
+                            <div id="map"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="text-secondary" for="transportation">Enter info about transportation</label>
+                    <input type="text" class="form-control" id="transportation" 
+                    placeholder="transportation info" formControlName="transportation" >
+                </div>
+                <div class="form-group">
                     <label class="text-secondary" for="availableFrom">Available from</label>
                     <input type="date" class="form-control" id="availableFrom" formControlName="availableFrom" >
+                </div>
+                <div class="form-group">
+                    <label class="text-secondary" for="photos">Add photos</label>
+                    <input type="file" multiple value="select" #selectFile (change)="onFileSelected($event)" class="form-control" id="photos" >
                 </div>
                 <div class="form-group">
                     <label class="text-secondary" for="availableTo">Available up to</label>
@@ -36,21 +56,53 @@
                 <div class="text-danger" *ngIf="!enlistForm.get('floor')?.valid && enlistForm.get('floor')?.touched">
                     <small>floor is mandatory</small>
                 </div>
-                <div class="form-group">
-                    <label class="text-secondary" for="price">Price Per Night</label>
-                    <input type="number" class="form-control" id="price" 
-                    placeholder="accomodation price" formControlName="price" >
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="text-secondary" for="price">Price per night</label>
+                        <input type="number" class="form-control" id="price" 
+                        placeholder="accomodation price" formControlName="price" >
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="text-secondary" for="extraCost">Extra cost per person</label>
+                        <input type="number" class="form-control" id="extraCost" 
+                        placeholder="extra cost/person" formControlName="extraCost" >
+                    </div>
                 </div>
-                <div class="text-danger" *ngIf="!enlistForm.get('price')?.valid && enlistForm.get('price')?.touched">
-                    <small>price is mandatory</small>
+                <div class="text-danger text-center" 
+                *ngIf="(!enlistForm.get('price')?.valid && enlistForm.get('price')?.touched) || 
+                (!enlistForm.get('extraCost')?.valid && enlistForm.get('extraCost')?.touched)">
+                    <small>price info is mandatory</small>
                 </div>
-                <div class="form-group">
-                    <label class="text-secondary" for="size">Size (in squeared m.)</label>
-                    <input type="number" class="form-control" id="size" 
-                    placeholder="accomodation size" formControlName="size" >
+                <div class="row">
+                    <div class="form-group col-md">
+                        <label class="text-secondary" for="size">Size (in squeared m.)</label>
+                        <input type="number" class="form-control" id="size" 
+                        placeholder="accomodation size" formControlName="size" >
+                    </div>
+                    <div class="form-group col-md">
+                        <label class="text-secondary" for="rooms">Number of rooms</label>
+                        <input type="number" class="form-control" id="rooms" 
+                        placeholder="number of rooms" formControlName="rooms" >
+                    </div>
                 </div>
-                <div class="text-danger" *ngIf="!enlistForm.get('size')?.valid && enlistForm.get('size')?.touched">
-                    <small>size is mandatory</small>
+                <div class="row">
+                    <div class="form-group col-md">
+                        <label class="text-secondary" for="beds">Number of beds</label>
+                        <input type="number" class="form-control" id="beds" 
+                        placeholder="number of beds" formControlName="beds" >
+                    </div>
+                    <div class="form-group col-md">
+                        <label class="text-secondary" for="beds">Number of bathrooms</label>
+                        <input type="number" class="form-control" id="bathrooms" 
+                        placeholder="number of bathrooms" formControlName="bathrooms" >
+                    </div>
+                </div>
+                <div class="text-danger text-center" 
+                *ngIf="(!enlistForm.get('size')?.valid && enlistForm.get('size')?.touched)
+                || (!enlistForm.get('rooms')?.valid && enlistForm.get('rooms')?.touched)
+                || (!enlistForm.get('beds')?.valid && enlistForm.get('beds')?.touched)
+                || (!enlistForm.get('bathrooms')?.valid && enlistForm.get('bathrooms')?.touched)">
+                    <small>size info is mandatory</small>
                 </div>
                 <div class="form-group">
                     <label class="text-secondary" for="maxPerson">Max person capacity</label>
@@ -80,6 +132,17 @@
                     <h5 class="my-2 text-secondary">Accomodation's extra services</h5> 
                     <div id="booleans">
                         <div>
+                            <label class="text-secondary" for="sittingRoomCheck">Sitting Room:</label>
+                            <input class="mx-2" type="radio" formControlName="sittingRoom" id="sittingRoomYes" value="true">
+                            <label class="form-check-label" class="text-secondary" for="sittingRoomYes">
+                                yes
+                            </label>
+                            <input class="mx-2" type="radio" formControlName="sittingRoom" id="sittingRoomNo" value="false">
+                            <label class="form-check-label" class="text-secondary" for="sittingRoomNo">
+                                no
+                            </label>
+                        </div>
+                        <div>
                             <label class="text-secondary" for="wifiCheck">Wifi:</label>
                             <input class="mx-2" type="radio" formControlName="wifi" id="wifiYes" value="true">
                             <label class="form-check-label" class="text-secondary" for="wifiYes">
@@ -102,7 +165,6 @@
                             </label>
                         </div>
                         <div>
-
                             <label class="text-secondary" for="kitchenCheck">Kitchen:</label>
                             <input class="mx-2" type="radio" formControlName="kitchen" id="kitchenYes" value="true">
                             <label class="form-check-label" class="text-secondary" for="kitchenYes">
