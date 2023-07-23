@@ -17,6 +17,7 @@ export class AccomodationsComponent implements OnInit{
   ngOnInit(): void {
     this.accomServ.getRoomsByOwner().subscribe(data => {
       this.accomodations=data;
+      console.log(data)
     })  
   }
 

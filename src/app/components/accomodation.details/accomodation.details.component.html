@@ -1,3 +1,24 @@
-<div class="container">
-    <img src="" id="accPreview">
+<div class="container py-3">
+    <h1 class="card-title my-3 text-secondary text-center">{{this.acc.name}}</h1>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+            <ngx-slick-carousel class="carousel card-img-top" #slickModal="slick-carousel" [config]="slideConfig">
+                <div ngxSlickItem *ngFor="let image of photoUrls">
+                    <img [src]="image" alt="img">
+                </div>
+            </ngx-slick-carousel>
+        </div>
+        <div class="col-1"></div>
+    </div>
+    <div class="card text-center" >
+        <div class="card-body">
+          <p class="card-text">Location :{{acc.location}}</p>
+          <div class="map-container mt-0" id="locationMap">
+              <div class="map-frame">
+                  <div id="map"></div>
+              </div>
+          </div>
+        </div>
+    </div>
 </div>

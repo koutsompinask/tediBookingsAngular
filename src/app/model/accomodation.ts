@@ -2,6 +2,8 @@ export class Accomodation{
     id:number;
     name:string;
     location:string;
+    lat:number;
+    lng:number;
     floor:number;
     price:number;
     size:number;
@@ -16,4 +18,5 @@ export class Accomodation{
 	tv:boolean;
 	parking:boolean;
 	elevator:boolean;
+    photos;
 }

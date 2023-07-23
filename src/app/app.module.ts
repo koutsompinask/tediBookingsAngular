@@ -21,6 +21,8 @@ import { AccomodationsComponent } from './components/host/accomodations/accomoda
 import { BookingsComponent } from './components/renter/bookings/bookings.component';
 import { HomeComponent } from './components/home/home.component';
 import { AccomodationDetailsComponent } from './components/accomodation.details/accomodation.details.component';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { AccomodationDetailsComponent } from './components/accomodation.details/
     HttpClientModule,
     NgxWebstorageModule.forRoot(),
     BrowserAnimationsModule,
-    ToastrModule
+    ToastrModule,
+    TooltipModule.forRoot(),
+    SlickCarouselModule
   ],
   providers: [
     {
