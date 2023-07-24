@@ -4,10 +4,12 @@ import { Router } from '@angular/router';
 import { BookingDto } from 'src/app/dto/bookingRequest';
 import { SearchDto } from 'src/app/dto/searchRequest';
 import { Accomodation } from 'src/app/model/accomodation';
+import { photo } from 'src/app/model/photo';
 import { User } from 'src/app/model/user';
 import { AccomodationsService } from 'src/app/services/accomodations.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { BookingsService } from 'src/app/services/bookings.service';
+import { PhotoService } from 'src/app/services/photo.service';
 import { UserService } from 'src/app/services/user.service';
 import { dateSearchValidator } from 'src/app/services/validators';
 
@@ -22,8 +24,9 @@ export class SearchComponent implements OnInit{
   searchRequest : SearchDto;
   searchResults : Accomodation[];
   invalidFormSubmit : Boolean = false;
+  photos:Map<number,string>= new Map();
 
-  constructor(private accServ: AccomodationsService,private authServ:AuthService,private router:Router,private bookingServ: BookingsService){ }
+  constructor(private accServ: AccomodationsService,private authServ:AuthService,private router:Router,private bookingServ: BookingsService,private phototServ: PhotoService){ }
 
   ngOnInit(): void {
     this.searchForm = new FormGroup({
@@ -55,6 +58,20 @@ export class SearchComponent implements OnInit{
     this.accServ.getAllRooms(this.searchRequest).subscribe( data =>{
       this.searchResults=data;
       console.log(data);
+      for (let acc of this.searchResults){
+        if (acc.photos.length>0){
+          this.phototServ.getPhotoContent(acc.photos[0].filename).subscribe(
+            photoObject => 
+            {
+              const reader = new FileReader();
+              reader.onloadend = () => {
+                this.photos.set(acc.id,reader.result as string);
+              };
+              reader.readAsDataURL(photoObject);
+            }
+          )
+        }
+      }
     },() => {
       alert('Search Failed!');
     }
@@ -74,7 +91,7 @@ export class SearchComponent implements OnInit{
   }
 
   isRenter(){
-    return(this.authServ.getRole().indexOf('RENTER')>=0);
+    return(this.authServ.getRole()?.indexOf('RENTER')>=0);
   }
 
   book(roomId: number){

@@ -1,0 +1,21 @@
+img{
+    height: 100%;
+    width: 100%;
+}
+
+.map-container {
+    margin: 0px;
+    height: 250px;
+    text-align: center;
+  }
+  
+.map-frame {
+    border: 2px solid black;
+    width: 70%;
+    height: 100%;
+    margin-left: 0px;
+}
+  
+#map {
+    height: 100%;
+}

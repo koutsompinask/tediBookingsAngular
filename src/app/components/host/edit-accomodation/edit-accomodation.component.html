@@ -3,13 +3,13 @@
         <div class="col-md-3"></div>
         <div class="container col-md-6 p-4">
             <h1 class="text-secondary text-center">Enlist an Accomodation</h1>
-            <form [formGroup]="enlistForm" (ngSubmit)="onSubmit()">
+            <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
                     <label class="text-secondary" for="name">Name</label>
                     <input type="text" class="form-control" id="name" 
                     placeholder="create your accomodation name" formControlName="name" >
                 </div>
-                <div class="text-danger" *ngIf="!enlistForm.get('name')?.valid && enlistForm.get('name')?.touched">
+                <div class="text-danger" *ngIf="!editForm.get('name')?.valid && editForm.get('name')?.touched">
                     <small>name is mandatory</small>
                 </div>
                 <h3 class="mt-2 mb-0 text-secondary">
@@ -20,7 +20,7 @@
                     <input type="text" class="form-control" id="location" 
                     placeholder="Country City Address" formControlName="location" >
                 </div>
-                <div class="text-danger" *ngIf="!enlistForm.get('location')?.valid && enlistForm.get('location')?.touched">
+                <div class="text-danger" *ngIf="!editForm.get('location')?.valid && editForm.get('location')?.touched">
                     <small>location is mandatory</small>
                 </div>
                 <div class="form-group">
@@ -53,7 +53,7 @@
                     <input type="number" class="form-control" id="floor" 
                     placeholder="accomodation floor" formControlName="floor" >
                 </div>
-                <div class="text-danger" *ngIf="!enlistForm.get('floor')?.valid && enlistForm.get('floor')?.touched">
+                <div class="text-danger" *ngIf="!editForm.get('floor')?.valid && editForm.get('floor')?.touched">
                     <small>floor is mandatory</small>
                 </div>
                 <div class="row">
@@ -69,8 +69,8 @@
                     </div>
                 </div>
                 <div class="text-danger text-center" 
-                *ngIf="(!enlistForm.get('price')?.valid && enlistForm.get('price')?.touched) || 
-                (!enlistForm.get('extraCost')?.valid && enlistForm.get('extraCost')?.touched)">
+                *ngIf="(!editForm.get('price')?.valid && editForm.get('price')?.touched) || 
+                (!editForm.get('extraCost')?.valid && editForm.get('extraCost')?.touched)">
                     <small>price info is mandatory</small>
                 </div>
                 <div class="row">
@@ -98,10 +98,10 @@
                     </div>
                 </div>
                 <div class="text-danger text-center" 
-                *ngIf="(!enlistForm.get('size')?.valid && enlistForm.get('size')?.touched)
-                || (!enlistForm.get('rooms')?.valid && enlistForm.get('rooms')?.touched)
-                || (!enlistForm.get('beds')?.valid && enlistForm.get('beds')?.touched)
-                || (!enlistForm.get('bathrooms')?.valid && enlistForm.get('bathrooms')?.touched)">
+                *ngIf="(!editForm.get('size')?.valid && editForm.get('size')?.touched)
+                || (!editForm.get('rooms')?.valid && editForm.get('rooms')?.touched)
+                || (!editForm.get('beds')?.valid && editForm.get('beds')?.touched)
+                || (!editForm.get('bathrooms')?.valid && editForm.get('bathrooms')?.touched)">
                     <small>size info is mandatory</small>
                 </div>
                 <div class="form-group">
@@ -109,7 +109,7 @@
                     <input type="number" class="form-control" id="maxPerson" 
                     placeholder="accomodation max person capacity" formControlName="maxPerson" >
                 </div>
-                <div class="text-danger" *ngIf="!enlistForm.get('maxPerson')?.valid && enlistForm.get('maxPerson')?.touched">
+                <div class="text-danger" *ngIf="!editForm.get('maxPerson')?.valid && editForm.get('maxPerson')?.touched">
                     <small>max person capacity is mandatory</small>
                 </div>
                 <div class="form-group">
@@ -217,7 +217,7 @@
                     </div>
                 </div>
                 <div class="text-center">
-                    <button type="submit" class="btn btn-lg btn-kkout mt-3">Enlist</button>
+                    <button type="submit" class="btn btn-lg btn-kkout mt-3">Update</button>
                 </div>
             </form>
         </div>

@@ -19,6 +19,10 @@ export class AccomodationsService {
     return this.http.post(`${this.apiUrl}/accomodation/enlist`,enlistRequest);
   }
 
+  update(enlistRequest : FormData,id : number){
+    return this.http.put(`${this.apiUrl}/accomodation/update/${id}`,enlistRequest);
+  }
+
   getAllRooms(search :SearchDto):Observable<Accomodation[]>{
     return this.http.post<Accomodation[]>(`${this.apiUrl}/accomodation/getFiltered`,search);
   }

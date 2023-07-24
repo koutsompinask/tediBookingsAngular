@@ -57,7 +57,7 @@ export class AuthService {
         return this.localStorage.retrieve('username');
     }
 
-    getRole(){
+    getRole():string{
         return this.localStorage.retrieve('role');
     }
 

@@ -23,6 +23,7 @@ import { HomeComponent } from './components/home/home.component';
 import { AccomodationDetailsComponent } from './components/accomodation.details/accomodation.details.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { EditAccomodationComponent } from './components/host/edit-accomodation/edit-accomodation.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     AccomodationsComponent,
     BookingsComponent,
     HomeComponent,
-    AccomodationDetailsComponent
+    AccomodationDetailsComponent,
+    EditAccomodationComponent
   ],
   imports: [
     BrowserModule,

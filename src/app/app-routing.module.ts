@@ -11,11 +11,13 @@ import { AccomodationsComponent } from './components/host/accomodations/accomoda
 import { BookingsComponent } from './components/renter/bookings/bookings.component';
 import { HomeComponent } from './components/home/home.component';
 import { AccomodationDetailsComponent } from './components/accomodation.details/accomodation.details.component';
+import { EditAccomodationComponent } from './components/host/edit-accomodation/edit-accomodation.component';
 
 const appRoute: Routes = [
     {path: '', redirectTo: 'home' , pathMatch: 'full'},
     {path: 'hostAccs', component:AccomodationsComponent},
-    {path: 'hostAccs/details', component: AccomodationDetailsComponent},
+    {path: 'viewAccomodation', component: AccomodationDetailsComponent},
+    {path: 'editAccomodation', component: EditAccomodationComponent},
     {path: 'enlist',component : EnlistComponent},
     {path: 'renterBooks', component: BookingsComponent},
     {path: 'signup', component: SignupComponent},

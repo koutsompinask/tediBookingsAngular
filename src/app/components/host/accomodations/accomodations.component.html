@@ -6,21 +6,23 @@
     <thead>
         <tr>
         <th scope="col">Accomodation</th>
-        <th scope="col">From</th>
-        <th scope="col">To</th>
-        <th scope="col">Cancel</th>
+        <th scope="col">Location</th>
+        <th scope="col">Edit</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let acc of accomodations">
         <td>
-            <a [routerLink]="['details']" [queryParams]="{id: acc.id}">
+            <a [routerLink]="['/viewAccomodation']" [queryParams]="{id: acc.id}">
                 {{acc.name}}
             </a>
         </td>
         <td>{{acc.location}}</td>
-        <td>{{acc.floor}}</td>
-        <td>{{acc.wifi}}</td>
+        <td>
+            <button class="btn btn-kkout" [routerLink]="['/editAccomodation']" [queryParams]="{id: acc.id}">
+                Edit
+            </button>
+        </td>
         </tr>
         <tr>
     </tbody>

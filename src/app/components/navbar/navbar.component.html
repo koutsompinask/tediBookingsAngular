@@ -1,13 +1,25 @@
-<nav id="myNavbar" class="navbar navbar-dark bg-warning mb-3" *ngIf="username==null">
-    <div class="container-fluid justify-content-between">
+<nav id="myNavbarGuest" class="navbar navbar-dark bg-warning mb-3 navbar-expand-md" *ngIf="username==null">
+    <div class="container-fluid">
         <a class="navbar-brand" [routerLink]="['home']">TediBookings</a>
-        <div id="navbarLoginSignin">
-            <button id="loginButton" class="btn btn-kkout btn-lg mx-2 p-1">
-                <a class="px-2 nav-link" aria-current="page" [routerLink]="['login']">Log-In</a>
-            </button>
-            <button id="signinButton" class="btn btn-kkout btn-lg p-1">
-                <a class="px-2 nav-link" aria-current="page" [routerLink]="['signup']">Sign-Up</a>
-            </button>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarGuest" aria-controls="navbarGuest" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse justify-content-between navbar-collapse" id="navbarGuest">
+            <div>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="px-2 nav-link" aria-current="page" [routerLink]="['search']">Search for Accomodation</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <button id="loginButton" class="btn btn-kkout btn-lg mx-2 p-1">
+                    <a class="px-2 nav-link" aria-current="page" [routerLink]="['login']">Log-In</a>
+                </button>
+                <button id="signinButton" class="btn btn-kkout btn-lg p-1">
+                    <a class="px-2 nav-link" aria-current="page" [routerLink]="['signup']">Sign-Up</a>
+                </button>
+            </div>
         </div>
     </div>
 </nav>

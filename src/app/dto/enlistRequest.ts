@@ -16,8 +16,9 @@ export class EnlistDto{
     rooms:number;
     bathrooms:number;
     maxPerson:number;
-    accType:string;
+    type:string;
     description : string;
+    houseRules: string;
     sittingRoom: boolean;
     wifi:boolean;
 	heat:boolean;

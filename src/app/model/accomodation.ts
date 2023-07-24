@@ -4,14 +4,21 @@ export class Accomodation{
     location:string;
     lat:number;
     lng:number;
+    transportation: string;
     floor:number;
     price:number;
+    extraCost: number;
     size:number;
+    beds:number;
+    rooms:number;
+    bathrooms: number;
     maxPerson:number;
-    accType:string;
+    type:string;
     description : string;
+    houseRules : string;
     availableFrom: Date;
-    availabeTo: Date;
+    availableTo: Date;
+    sittingRoom: boolean;
     wifi:boolean;
 	heat:boolean;
 	kitchen:boolean;
@@ -19,4 +26,5 @@ export class Accomodation{
 	parking:boolean;
 	elevator:boolean;
     photos;
+    owner;
 }

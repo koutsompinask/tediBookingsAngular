@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EnlistDto } from 'src/app/dto/enlistRequest';
@@ -12,12 +12,12 @@ import { photo } from 'src/app/model/photo';
   templateUrl: './enlist.component.html',
   styleUrls: ['./enlist.component.css']
 })
-export class EnlistComponent implements OnInit{
+export class EnlistComponent implements OnInit,AfterViewInit,OnDestroy{
   enlistForm: FormGroup;
   enlistRequest : EnlistDto;
   private map: L.Map;
   private centroid: L.LatLngExpression = [37.8601, 24.0589]; //
-  coords : number[] = [];
+  coords : number[] = new Array();
   photosArray : photo[] =[] ;
 
   accTypes= [
@@ -43,13 +43,12 @@ export class EnlistComponent implements OnInit{
     tiles.addTo(this.map);
     var markersGroup = L.layerGroup();
     this.map.addLayer(markersGroup);
+    console.log('init')
     
-    this.map.on('click',function(e) {
-      // get the count of currently displayed markers
+    this.map.on('click',(e) =>{
       var markersCount = markersGroup.getLayers().length;
-      this.coords=[e.latlng['lat'],e.latlng['lng']]
-      console.log(this.coords)
-      if (markersCount = 1) {
+      this.coords=[e.latlng.lat,e.latlng.lng];
+      if (markersCount === 1) {
         markersGroup.clearLayers();
       }
       var marker = L.marker(e.latlng,{icon: L.divIcon({className: 'poi', html: '<i class="text-danger fa-2x fa fa-thumb-tack" aria-hidden="true"></i>'})}).addTo(markersGroup);
@@ -58,7 +57,6 @@ export class EnlistComponent implements OnInit{
   }
 
   ngOnInit():void{
-    this.initMap();
     this.enlistForm = new FormGroup({
       name : new FormControl(null,Validators.required),
       location : new FormControl(null,Validators.required),
@@ -75,6 +73,7 @@ export class EnlistComponent implements OnInit{
       maxPerson : new FormControl(null,[Validators.required,charsDisallowedValidator(/[^0-9]/)]),
       accType : new FormControl('HOTEL',Validators.required),
       description : new FormControl(null),
+      houseRules: new FormControl(null),
       sittingRoom : new FormControl('false',Validators.required),
       wifi : new FormControl('false',Validators.required),
       heat : new FormControl('false',Validators.required),
@@ -88,7 +87,21 @@ export class EnlistComponent implements OnInit{
     document.getElementById('availableTo').setAttribute('min',today);
   }
 
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.initMap()
+    }, 500);  
+  }
+
+  ngOnDestroy(): void {
+    if (this.map) {
+      this.map.off();
+      this.map.remove();
+    }
+  }
+
   onSubmit(){
+    console.log(this.coords,'before')
     if (!this.enlistForm.valid) return;
     if (this.coords.length != 2) this.coords=[100,200]; 
     this.enlistRequest={
@@ -107,8 +120,9 @@ export class EnlistComponent implements OnInit{
       beds: this.enlistForm.get('beds')?.value,
       bathrooms: this.enlistForm.get('bathrooms')?.value,
       maxPerson: this.enlistForm.get('maxPerson')?.value,
-      accType: this.enlistForm.get('accType')?.value,
+      type: this.enlistForm.get('accType')?.value,
       description: this.enlistForm.get('description')?.value,
+      houseRules:this.enlistForm.get('houseRules')?.value,
       sittingRoom : this.transBool(this.enlistForm.get('sittingRoom')?.value),
       wifi: this.transBool(this.enlistForm.get('wifi')?.value),
       heat: this.transBool(this.enlistForm.get('heat')?.value),
@@ -118,6 +132,7 @@ export class EnlistComponent implements OnInit{
       elevator: this.transBool(this.enlistForm.get('elevator')?.value),
       photos: this.photosArray
     }
+    console.log(this.enlistRequest);
     this.accomServ.enlist(this.prepareFormData(this.enlistRequest)).subscribe( data => {
       console.log(data);
       this.router.navigate(['/home'])
