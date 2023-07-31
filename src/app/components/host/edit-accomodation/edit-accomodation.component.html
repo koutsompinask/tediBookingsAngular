@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-3"></div>
         <div class="container col-md-6 p-4">
-            <h1 class="text-secondary text-center">Enlist an Accomodation</h1>
+            <h1 class="text-secondary text-center">Edit Accomodation</h1>
             <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
                     <label class="text-secondary" for="name">Name</label>
@@ -43,6 +43,19 @@
                 <div class="form-group">
                     <label class="text-secondary" for="availableTo">Available up to</label>
                     <input type="date" class="form-control" id="availableTo" formControlName="availableTo" >
+                </div>
+                <div class="form-group">
+                    <labeL class="text-secondary" for="deletePhotos">Delete Photos</labeL>
+                    <div class="row" id="deletePhotos"> 
+                        <div class="col-lg-4 col-sm-6" *ngFor="let image of photoUrls">
+                            <div class="text-center image-container">
+                                <img [src]="image" alt="img">
+                                <button type="button" class="btn btn-danger btn-sm delete-button" (click)="deletePhoto(image)">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="text-secondary" for="photos">Add photos</label>

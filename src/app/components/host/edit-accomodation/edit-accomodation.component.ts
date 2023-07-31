@@ -7,6 +7,7 @@ import { AccomodationsService } from 'src/app/services/accomodations.service';
 import * as L from 'leaflet';
 import { Accomodation } from 'src/app/model/accomodation';
 import { charsDisallowedValidator } from 'src/app/services/validators';
+import { PhotoService } from 'src/app/services/photo.service';
 
 @Component({
   selector: 'app-edit-accomodation',
@@ -20,6 +21,8 @@ export class EditAccomodationComponent implements OnDestroy{
   private centroid: L.LatLngExpression = [37.8601, 24.0589]; //
   coords : number[] = new Array();
   photosArray : photo[] =[] ;
+  photoUrls : string[];
+  photoToFilenameMap: Map<string,string> = new Map();
   acc : Accomodation;
 
   accTypes= [
@@ -28,7 +31,7 @@ export class EditAccomodationComponent implements OnDestroy{
     {id: 'HOUSE' , value: 'House'}
   ]
 
-  constructor(private accomServ:AccomodationsService,private router:Router,private route:ActivatedRoute){}
+  constructor(private accomServ:AccomodationsService,private router:Router,private route:ActivatedRoute,private photoServ: PhotoService){}
 
   private initMap(): void {
     if (this.acc.lat!=100) {
@@ -94,6 +97,24 @@ export class EditAccomodationComponent implements OnDestroy{
         parking : new FormControl(this.transBoolRev(this.acc.parking),Validators.required),
         elevator : new FormControl(this.transBoolRev(this.acc.elevator),Validators.required)
       });
+      const st:string[]=[];
+      for (let s of data.photos){
+        this.photoServ.getPhotoContent(s.filename).subscribe(
+          (response: Blob) => {
+            // Convert the blob to a data URL
+            const reader = new FileReader();
+            reader.onloadend = () => {
+              st.push(reader.result as string);
+              this.photoToFilenameMap.set(reader.result as string,s.filename);
+            };
+            reader.readAsDataURL(response);
+          },
+          error => {
+            console.error('Error fetching photo:', error);
+          }
+          );
+        }
+      this.photoUrls=st
     }
     )
     this.editForm = new FormGroup({
@@ -139,10 +160,25 @@ export class EditAccomodationComponent implements OnDestroy{
     }
   }
 
+  deletePhoto(img : string){
+    const filename:string=this.photoToFilenameMap.get(img);
+    this.photoServ.deletePhoto(filename).subscribe(
+      data => {
+        alert(data);
+        const ind=this.photoUrls.indexOf(img);
+        if (ind!==-1){
+          this.photoUrls.splice(ind,1);
+        }
+      }
+    );
+    return;
+  }
+
   onSubmit(){
-    console.log(this.coords,'before')
     if (!this.editForm.valid) return;
-    if (this.coords.length != 2) this.coords=[100,200]; 
+    if (this.coords.length != 2) {
+      this.coords=[this.acc.lat,this.acc.lng]; 
+    }
     this.enlistRequest={
       name: this.editForm.get('name')?.value,
       location: this.editForm.get('location')?.value,
@@ -171,10 +207,8 @@ export class EditAccomodationComponent implements OnDestroy{
       elevator: this.transBool(this.editForm.get('elevator')?.value),
       photos: this.photosArray
     }
-    console.log(this.enlistRequest);
-    this.accomServ.enlist(this.prepareFormData(this.enlistRequest)).subscribe( data => {
-      console.log(data);
-      this.router.navigate(['/home'])
+    this.accomServ.update(this.prepareFormData(this.enlistRequest),this.acc.id).subscribe( data => {
+      this.router.navigate(['/viewAccomodation'],{queryParams: {id : this.acc.id}});
     }, () => {
       alert('Enlistment Failed! Please try again');
     })

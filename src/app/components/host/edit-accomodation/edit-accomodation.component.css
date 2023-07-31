@@ -19,3 +19,17 @@ img{
 #map {
     height: 100%;
 }
+
+.image-container {
+    position: relative;
+    display: inline-block; 
+}
+  
+.delete-button {
+    position: absolute;
+    top: 2px; 
+    right: 2px; 
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}  

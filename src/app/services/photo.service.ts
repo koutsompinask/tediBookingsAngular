@@ -16,4 +16,8 @@ export class PhotoService{
         // Make an HTTP GET request to fetch the image content as a blob
         return this.http.get(`${this.apiUrl}/photo/${filename}`, { responseType: 'blob' });
       }
+
+    deletePhoto(filename : string){
+        return this.http.delete(`${this.apiUrl}/photo/${filename}`,{ responseType: 'text' });
+    }
 }

@@ -20,7 +20,8 @@ export class AuthService {
         this.userEmitter.emit();
     }
 
-    constructor(private http : HttpClient ,private localStorage: LocalStorageService){}
+    constructor(private http : HttpClient ,private localStorage: LocalStorageService){
+    }
 
     public registerUser( user : UserSignInDto){
         return this.http.post(`${this.apiUrl}/auth/signup`,user);
