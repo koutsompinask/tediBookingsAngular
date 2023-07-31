@@ -1,0 +1,36 @@
+h5 {
+  margin-top: 30px;
+  margin-left: 168px;
+  color: blue;
+}
+
+.row {
+  margin-top: 100px;
+}
+.container-fluid {
+  margin-top: 60px;
+  background: #fff;
+  border-radius: 10px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: blue;
+}
+
+p {
+  width: 800px;
+}
+
+.blue-icons {
+  margin-top: 20px;
+  float: left;
+  margin-right: 40px;
+  height: 128px;
+  width: 128px;
+}
+
+.blue-icons1 {
+  float: left;
+  margin-right: 40px;
+  height: 128px;
+  width: 128px;
+}
