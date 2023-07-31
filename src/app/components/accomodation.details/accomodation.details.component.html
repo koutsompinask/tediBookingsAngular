@@ -13,25 +13,28 @@
     </div>
     <div class="text-center" >
         <div class="text-secondary">
-          <p class="card-text">Location : {{acc?.location}}</p>
-          <div class="map-container mt-0" id="locationMap" *ngIf="showMap">
-              <div class="map-frame">
+            <p class="card-text">Location : {{acc?.location}}</p>
+            <div class="map-container mt-0" id="locationMap" *ngIf="showMap">
+                <div class="map-frame">
                 <div id="map"></div>
-              </div>
-          </div>
-          <div>
-          <p class="card-text">Price : {{acc?.price}} €</p>
-          <p class="card-text">Extra Cost per Person : {{acc?.extraCost}} €</p>
-          <p class="card-text">Floor : {{acc?.floor}}</p>
-          <p class="card-text">Size : {{acc?.size}}</p>
-          <p class="card-text">Beds : {{acc?.beds}}</p>
-          <p class="card-text">Bedrooms : {{acc?.rooms}}</p>
-          <p class="card-text">Bathrooms : {{acc?.bathrooms}}</p>
-          <p class="card-text">Max Person : {{acc?.maxPerson}}</p>
-          <p class="card-text">Available From : {{acc?.availableFrom.toLocaleDateString()}}</p>
-          <p class="card-text">Available To : {{acc?.availableTo.toLocaleDateString()}}</p>
-          <p class="card-text">Type : {{acc?.type}}</p>
-          <div *ngIf="acc?.wifi || acc?.sittingRoom || acc?.heat || acc?.kitchen || acc?.tv || acc?.parking || acc?.elevator">
+                </div>
+            </div>
+            <div>
+            <p *ngIf="canBook">
+            Owner: {{acc?.owner.username}}
+            </p>
+            <p class="card-text">Price : {{acc?.price}} €</p>
+            <p class="card-text">Extra Cost per Person : {{acc?.extraCost}} €</p>
+            <p class="card-text">Floor : {{acc?.floor}}</p>
+            <p class="card-text">Size : {{acc?.size}}</p>
+            <p class="card-text">Beds : {{acc?.beds}}</p>
+            <p class="card-text">Bedrooms : {{acc?.rooms}}</p>
+            <p class="card-text">Bathrooms : {{acc?.bathrooms}}</p>
+            <p class="card-text">Max Person : {{acc?.maxPerson}}</p>
+            <p class="card-text">Available From : {{acc?.availableFrom.toLocaleDateString()}}</p>
+            <p class="card-text">Available To : {{acc?.availableTo.toLocaleDateString()}}</p>
+            <p class="card-text">Type : {{acc?.type}}</p>
+            <div *ngIf="acc?.wifi || acc?.sittingRoom || acc?.heat || acc?.kitchen || acc?.tv || acc?.parking || acc?.elevator">
             <h4>Extra Services:</h4>
             <p *ngIf="acc?.wifi">Wifi</p>
             <p *ngIf="acc?.sittingRoom">Sitting Room</p>
@@ -40,10 +43,10 @@
             <p *ngIf="acc?.tv">Tv</p>
             <p *ngIf="acc?.parking">Parking</p>
             <p *ngIf="acc?.elevator">Elevator</p>
-          </div>
-          </div>
-          <button class="btn btn-kkout" *ngIf="canEdit" [routerLink]="['/editAccomodation']" [queryParams]="{id: acc.id}" >Edit</button>
-          <button class="btn btn-kkout" *ngIf="canBook" (click)="book(acc.id)" >Reserve</button>
+            </div>
+            </div>
+            <button class="btn btn-kkout" *ngIf="canEdit" [routerLink]="['/editAccomodation']" [queryParams]="{id: acc.id}" >Edit</button>
+            <button class="btn btn-kkout" *ngIf="canBook" (click)="book(acc.id)" >Reserve</button>
         </div>
     </div>
 </div>

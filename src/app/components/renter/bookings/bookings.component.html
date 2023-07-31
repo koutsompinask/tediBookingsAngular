@@ -13,7 +13,11 @@
     </thead>
     <tbody>
         <tr *ngFor="let b of bookings">
-        <td>{{b.accName}}</td>
+        <td>
+            <a [routerLink]="['/viewAccomodation']" [queryParams]="{id: b.accId}">
+                {{b.accName}}
+            </a>
+        </td>
         <td>{{dateConverter(b.from)}}</td>
         <td>{{dateConverter(b.to)}}</td>
         <td>

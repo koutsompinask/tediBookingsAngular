@@ -100,6 +100,7 @@ export class AccomodationDetailsComponent implements AfterViewInit,OnDestroy{
   }
 
   book(roomId: number){
+    if (this.from==null || this.to==null || this.numPerson==null) return; //to do add form   
     const bookReq: BookingDto = {
       from : this.from,
       to : this.to
