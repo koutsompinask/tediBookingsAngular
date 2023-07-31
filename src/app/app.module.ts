@@ -11,7 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgxWebstorageModule } from 'ngx-webstorage';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { TokenInterceptor } from './token-interceptor';
 import { AdminComponent } from './components/admin/admin.component';
@@ -25,6 +25,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { EditAccomodationComponent } from './components/host/edit-accomodation/edit-accomodation.component';
 import { InboxComponent } from './components/message/inbox/inbox.component';
+import { DetailsComponent } from './components/details/details.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { InboxComponent } from './components/message/inbox/inbox.component';
     HomeComponent,
     AccomodationDetailsComponent,
     EditAccomodationComponent,
-    InboxComponent
+    DetailsComponent,
+    InboxComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,15 +56,15 @@ import { InboxComponent } from './components/message/inbox/inbox.component';
     BrowserAnimationsModule,
     ToastrModule,
     TooltipModule.forRoot(),
-    SlickCarouselModule
+    SlickCarouselModule,
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
-      multi: true
-    }
+      multi: true,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

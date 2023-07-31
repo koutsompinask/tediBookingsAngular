@@ -1,0 +1,19 @@
+.card {
+  width: 18rem;
+  height: 25rem;
+  border-radius: 10px;
+  border: solid;
+  border-color: lightblue;
+  background-color: #fff;
+}
+
+.btn {
+  position: absolute;
+  bottom: 15px;
+  left: 30px;
+}
+.card-img-top {
+  width: 268px;
+  height: 180px;
+  align-self: center;
+}

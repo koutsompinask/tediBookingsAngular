@@ -1,22 +1,25 @@
-html{
-    background-image: url("assets/sk.jpg");
+/* html {
+  background-image: url("assets/back.jpg");
+} */
+
+.container {
+  background-color: rgb(220, 220, 158);
 }
 
-.container{
-    background-color: rgb(220, 220, 158);
+body {
+  background-image: url("assets/blueback.jpg");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
-body{
-    background-image: url("assets/sk.jpg");
-}
-
-.btn-kkout{
-    background-color: rgb(183, 184, 97);
-    color:white;
-    transition-duration: 0.1s;
+.btn-kkout {
+  background-color: rgb(183, 184, 97);
+  color: white;
+  transition-duration: 0.1s;
 }
 
 .btn-kkout:hover {
-    background-color: white;
-    color: rgb(183, 184, 97);
+  background-color: white;
+  color: rgb(183, 184, 97);
 }
