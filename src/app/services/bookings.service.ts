@@ -5,8 +5,8 @@ import { BookingDto } from "../dto/bookingRequest";
 import { BookingResponceDto } from "../dto/bookingsResponce";
 
 @Injectable({
-    providedIn: 'root'
-  })
+  providedIn: 'root'
+})
 export class BookingsService {
     apiUrl:string =environment.apiHost ;
   
