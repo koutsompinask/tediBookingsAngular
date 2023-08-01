@@ -21,6 +21,10 @@ export class MessageService {
         return this.http.get<Message[]>(`${this.apiUrl}/messages/getInbox`);
     }
 
+    getOutgoing():Observable<Message[]>{
+        return this.http.get<Message[]>(`${this.apiUrl}/messages/getOutgoing`);
+    }
+
     read(id : number){
         return this.http.get(`${this.apiUrl}/messages/read/${id}`,{responseType : 'text'});
     }

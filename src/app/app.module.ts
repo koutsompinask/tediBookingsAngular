@@ -26,6 +26,8 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { EditAccomodationComponent } from './components/host/edit-accomodation/edit-accomodation.component';
 import { InboxComponent } from './components/message/inbox/inbox.component';
 import { DetailsComponent } from './components/details/details.component';
+import { OutgoingComponent } from './components/message/outgoing/outgoing.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,7 @@ import { DetailsComponent } from './components/details/details.component';
     EditAccomodationComponent,
     DetailsComponent,
     InboxComponent,
+    OutgoingComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,6 +60,7 @@ import { DetailsComponent } from './components/details/details.component';
     ToastrModule,
     TooltipModule.forRoot(),
     SlickCarouselModule,
+    NgxPaginationModule,
   ],
   providers: [
     {

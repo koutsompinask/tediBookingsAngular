@@ -1,0 +1,7 @@
+::ng-deep .ngx-pagination li.current{ 
+    background-color: rgba(255, 145, 0, 0.877);
+}
+
+::ng-deep .ngx-pagination li{
+    background-color: white;
+}

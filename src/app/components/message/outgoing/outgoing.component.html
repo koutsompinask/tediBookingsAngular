@@ -1,5 +1,6 @@
+<!--TO DO-->
 <div class="container py-3 text-center">
-    <h1 class="text-secondary my-2">Incoming Messages</h1>
+    <h1 class="text-secondary my-2">Outgoing Messages</h1>
     <div class="my-2">
         <pagination-controls class="text-secondary" (pageChange)="page = $event"></pagination-controls>
     </div>
@@ -7,7 +8,7 @@
         <thead>
             <tr>
             <th scope="col">Message</th>
-            <th scope="col">From</th>
+            <th scope="col">To</th>
             <th scope="col">Read-Reply</th>
             </tr>
         </thead>
@@ -16,17 +17,15 @@
                 <td class="col-7" [ngStyle]="{ 'font-weight': m.readFlag ? 'normal' : 'bold' }">
                     {{m.message}}
                 </td>
-                <td  class="col-2">{{m.sender.username}}</td>
+                <td  class="col-2">{{m.receiver.username}}</td>
                 <td  class="col-3">
                     <button class="btn btn-kkout" (click)="read(m.id)" data-bs-toggle="modal" data-bs-target="#viewModal">View Conversation</button>
                 </td>
             </tr>
             <tr>
         </tbody>
-    </table>
-    
+        </table>
 </div>
-    
 
 <div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -58,4 +57,3 @@
         </div>
     </div>
 </div>
-
