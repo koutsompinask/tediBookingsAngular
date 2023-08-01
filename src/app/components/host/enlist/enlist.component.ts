@@ -132,7 +132,6 @@ export class EnlistComponent implements OnInit,AfterViewInit,OnDestroy{
       elevator: this.transBool(this.enlistForm.get('elevator')?.value),
       photos: this.photosArray
     }
-    console.log(this.enlistRequest);
     this.accomServ.enlist(this.prepareFormData(this.enlistRequest)).subscribe( data => {
       console.log(data);
       this.router.navigate(['/home'])

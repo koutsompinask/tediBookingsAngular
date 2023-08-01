@@ -23,7 +23,7 @@ export class AuthService {
     constructor(private http : HttpClient ,private localStorage: LocalStorageService){
     }
 
-    public registerUser( user : UserSignInDto){
+    public registerUser( user : FormData){
         return this.http.post(`${this.apiUrl}/auth/signup`,user);
       }
     

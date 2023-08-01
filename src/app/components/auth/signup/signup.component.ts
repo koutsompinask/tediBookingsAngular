@@ -4,6 +4,7 @@ import { charsDisallowedValidator, passwordMatchValidator } from 'src/app/servic
 import { AuthService } from 'src/app/services/auth.service';
 import { UserSignInDto } from 'src/app/dto/registerRequest';
 import { Router } from '@angular/router';
+import { photo } from 'src/app/model/photo';
 
 @Component({
   selector: 'app-signup',
@@ -13,6 +14,7 @@ import { Router } from '@angular/router';
 export class SignupComponent implements OnInit {
   signupForm : FormGroup;
   registerRequest : UserSignInDto;
+  profilePic : photo;
   
   constructor(private authService : AuthService, private router : Router){ }
 
@@ -45,7 +47,8 @@ export class SignupComponent implements OnInit {
       password:this.signupForm.get('passwordCreation.password')?.value,
       role:this.signupForm.get('role')?.value
     }
-    this.authService.registerUser(this.registerRequest).subscribe( data => {
+    console.log(this.prepareFormData(this.registerRequest));
+    this.authService.registerUser(this.prepareFormData(this.registerRequest)).subscribe( data => {
       console.log(data);
       this.router.navigate(['/home'],{queryParams: {registered : true}});
     }, () => {
@@ -53,5 +56,32 @@ export class SignupComponent implements OnInit {
     }
     );
   }
+
+  onFileSelected(event){
+    if (event.target.files){
+      this.profilePic = {
+        file : event.target.files[0]
+      }
+    }
+  }
+
+  prepareFormData (req : UserSignInDto): FormData{
+    const formData = new FormData();
+    formData.append(
+      'user',
+      new Blob([JSON.stringify(req)],{type: 'application/json'})
+    );
+
+    if (this.profilePic){
+      formData.append(
+        'photo',
+        this.profilePic.file,
+        this.profilePic.file.name
+      );
+    }
+
+    return formData;
+  }
+
 
 }

@@ -12,6 +12,10 @@
                 <div class="text-danger" *ngIf="!signupForm.get('username')?.valid && signupForm.get('username')?.touched">
                     <small>Username can contain 3-20 alphanumeric chars (only letters A-Z, numbers and '_')</small>
                 </div>
+                <div class="form-group">
+                    <label class="text-secondary" for="photo">Add Profile Picture (optional)</label>
+                    <input type="file" value="select" #selectFile (change)="onFileSelected($event)" class="form-control" id="photo" >
+                </div>
                 <div class=row>
                     <div class="form-group col-md">
                         <label class="text-secondary" for="firstName">First Name</label>
