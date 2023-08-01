@@ -16,6 +16,7 @@ import { InboxComponent } from './components/message/inbox/inbox.component';
 import { OutgoingComponent } from './components/message/outgoing/outgoing.component';
 import { ProfileComponent } from './components/profile/profile.component';
 
+
 const appRoute: Routes = [
     {path: '', redirectTo: 'home' , pathMatch: 'full'},
     {path: 'hostAccs', component:AccomodationsComponent},
@@ -33,14 +34,9 @@ const appRoute: Routes = [
     {path: 'admin', component: AdminComponent},
     {path: '**', component : ErrorComponent}
   ]
-@NgModule({
-    imports : [
-        RouterModule.forRoot(appRoute)
-    ],
-    exports: [
-        RouterModule
-    ]
-})
-export class AppRoutingModule{
 
-}
+@NgModule({
+  imports: [RouterModule.forRoot(appRoute)],
+  exports: [RouterModule],
+})
+export class AppRoutingModule {}
