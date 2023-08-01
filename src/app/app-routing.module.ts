@@ -14,6 +14,7 @@ import { AccomodationDetailsComponent } from './components/accomodation.details/
 import { EditAccomodationComponent } from './components/host/edit-accomodation/edit-accomodation.component';
 import { InboxComponent } from './components/message/inbox/inbox.component';
 import { OutgoingComponent } from './components/message/outgoing/outgoing.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const appRoute: Routes = [
     {path: '', redirectTo: 'home' , pathMatch: 'full'},
@@ -21,6 +22,7 @@ const appRoute: Routes = [
     {path: 'viewAccomodation', component: AccomodationDetailsComponent},
     {path: 'inbox', component: InboxComponent},
     {path: 'outgoing', component: OutgoingComponent},
+    {path: 'viewProfile', component: ProfileComponent},
     {path: 'editAccomodation', component: EditAccomodationComponent},
     {path: 'enlist',component : EnlistComponent},
     {path: 'renterBooks', component: BookingsComponent},

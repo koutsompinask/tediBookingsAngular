@@ -12,7 +12,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let m of messages | paginate: { itemsPerPage: tableSize, currentPage: page, totalItems: messages.length }">
+            <tr *ngFor="let m of messages | paginate: { itemsPerPage: tableSize, currentPage: page, totalItems: messages?.length }">
                 <td class="col-7" [ngStyle]="{ 'font-weight': m.readFlag ? 'normal' : 'bold' }">
                     {{m.message}}
                 </td>

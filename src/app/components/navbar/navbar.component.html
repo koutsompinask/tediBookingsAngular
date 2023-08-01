@@ -36,13 +36,16 @@
                     <a class="px-2 nav-link" aria-current="page" [routerLink]="['admin']">Approve Users</a>
                 </li>
             </ul>
-                <span class="px-2 text-light" aria-current="page" [routerLink]="['home']">
+            <span class="nav-item dropdown px-2 text-light" aria-current="page">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="text-light fa fa-user" aria-hidden="true"></i>
                     Logged in as {{username}},{{role}}
-                </span>
-                <button id="logoutButton" class="btn btn-lg btn-kkout p-1" (click)="logout()">
-                    <a class="px-2 nav-link" aria-current="page" >Log Out</a>
-                </button>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#" [routerLink]="['viewProfile']">My Profile</a></li>
+                    <li><a class="dropdown-item" href="#" (click)="logout()">Log out</a></li>
+                </ul>
+            </span>
         </div>
     </div>
 </nav>
@@ -71,13 +74,16 @@
                     </ul>
                 </li>
             </ul>
-            <span class="px-2 text-light" aria-current="page" [routerLink]="['home']">
-                <i class="text-light fa fa-user" aria-hidden="true"></i>
-                Logged in as {{username}},{{role}}
+            <span class="nav-item dropdown px-2 text-light" aria-current="page">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="text-light fa fa-user" aria-hidden="true"></i>
+                    Logged in as {{username}},{{role}}
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#" [routerLink]="['viewProfile']">My Profile</a></li>
+                    <li><a class="dropdown-item" href="#" (click)="logout()">Log out</a></li>
+                </ul>
             </span>
-            <button id="logoutButton" class="btn btn-lg btn-kkout p-1" (click)="logout()">
-                <a class="px-2 nav-link" aria-current="page" >Log Out</a>
-            </button>
         </div>
     </div>
 </nav>
@@ -106,13 +112,16 @@
                     </ul>
                 </li>
             </ul>
-            <span class="px-2 text-light" aria-current="page" [routerLink]="['home']">
-                <i class="text-light fa fa-user" aria-hidden="true"></i>
-                Logged in as {{username}},{{role}}
+            <span class="nav-item dropdown px-2 text-light" aria-current="page">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="text-light fa fa-user" aria-hidden="true"></i>
+                    Logged in as {{username}},{{role}}
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#" [routerLink]="['viewProfile']">My Profile</a></li>
+                    <li><a class="dropdown-item" href="#" (click)="logout()">Log out</a></li>
+                </ul>
             </span>
-            <button id="logoutButton" class="btn btn-lg btn-kkout p-1" (click)="logout()">
-                <a class="px-2 nav-link" aria-current="page" >Log Out</a>
-            </button>
         </div>
     </div>
 </nav>
@@ -147,13 +156,16 @@
                     </ul>
                 </li>
             </ul>
-            <span class="px-2 text-light" aria-current="page" [routerLink]="['home']">
-                <i class="text-light fa fa-user" aria-hidden="true"></i>
-                Logged in as {{username}},{{role}}
+            <span class="nav-item dropdown px-2 text-light" aria-current="page">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="text-light fa fa-user" aria-hidden="true"></i>
+                    Logged in as {{username}},{{role}}
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#" [routerLink]="['viewProfile']">My Profile</a></li>
+                    <li><a class="dropdown-item" href="#" (click)="logout()">Log out</a></li>
+                </ul>
             </span>
-            <button id="logoutButton" class="btn btn-lg btn-kkout p-1" (click)="logout()">
-                <a class="px-2 nav-link" aria-current="page" >Log Out</a>
-            </button>
         </div>
     </div>
 </nav>
