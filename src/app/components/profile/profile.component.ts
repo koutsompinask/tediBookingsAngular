@@ -18,19 +18,21 @@ export class ProfileComponent implements OnInit{
     this.userServ.getDetails().subscribe(data => {
       this.user=data;
       console.log(this.user);//remove after complete view
-      this.photoServ.getPhotoContent(this.user.photoUrl).subscribe(
-        (response: Blob) => {
-          // Convert the blob to a data URL
-          const reader = new FileReader();
-          reader.onloadend = () => {
-            this.profilePic=(reader.result as string);
-          };
-          reader.readAsDataURL(response);
-        },
-        error => {
-          console.error('Error fetching photo:', error);
-        }
-      )
+      if (this.user.photoUrl){
+        this.photoServ.getPhotoContent(this.user.photoUrl).subscribe(
+          (response: Blob) => {
+            // Convert the blob to a data URL
+            const reader = new FileReader();
+            reader.onloadend = () => {
+              this.profilePic=(reader.result as string);
+            };
+            reader.readAsDataURL(response);
+          },
+          error => {
+            console.error('Error fetching photo:', error);
+          }
+        )
+      }
     })
   }
   
