@@ -1,13 +1,14 @@
-<div class="container">
+<div class="container" *ngIf="user">
   <div class="card text-center">
     <div class="card-image mt-5" *ngIf="profilePic">
       <img [src]="profilePic">
     </div>  
-    <div class="card-body">
-      <p>First Name:</p>
-      <p>Last Name:</p>
-      <p>E-mail:</p>
-      <p>Role:</p>
+    <div class="card-body" >
+      <p>Username:{{user.username}}</p>
+      <p>First Name:{{user.firstName}}</p>
+      <p>Last Name:{{user.lastName}}</p>
+      <p>E-mail:{{user.email}}</p>
+      <p>Role:{{user.role}}</p>
     </div>
   </div>
 </div>

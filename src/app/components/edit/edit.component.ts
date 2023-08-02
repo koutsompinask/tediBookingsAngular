@@ -1,20 +1,20 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/model/user';
 import { PhotoService } from 'src/app/services/photo.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  selector: 'app-edit',
+  templateUrl: './edit.component.html',
+  styleUrls: ['./edit.component.css']
 })
-export class ProfileComponent implements OnInit{
-  user : User;
-  profilePic : string;
+export class EditComponent implements OnInit{
+  user: User;
+  profilePic: string;
 
-  constructor(private userServ:UserService,private photoServ : PhotoService){}
+  constructor(private userServ:UserService, private photoServ:PhotoService){}
 
-  ngOnInit(): void {
+  ngOnInit(): void{
     this.userServ.getDetails().subscribe(data => {
       this.user=data;
       if (this.user.photoUrl){

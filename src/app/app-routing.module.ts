@@ -15,6 +15,7 @@ import { EditAccomodationComponent } from './components/host/edit-accomodation/e
 import { InboxComponent } from './components/message/inbox/inbox.component';
 import { OutgoingComponent } from './components/message/outgoing/outgoing.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { EditComponent } from './components/edit/edit.component';
 
 
 const appRoute: Routes = [
@@ -24,6 +25,7 @@ const appRoute: Routes = [
     {path: 'inbox', component: InboxComponent},
     {path: 'outgoing', component: OutgoingComponent},
     {path: 'viewProfile', component: ProfileComponent},
+    {path: 'editProfile', component: EditComponent},
     {path: 'editAccomodation', component: EditAccomodationComponent},
     {path: 'enlist',component : EnlistComponent},
     {path: 'renterBooks', component: BookingsComponent},

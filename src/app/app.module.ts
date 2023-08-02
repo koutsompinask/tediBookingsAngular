@@ -28,6 +28,7 @@ import { InboxComponent } from './components/message/inbox/inbox.component';
 import { DetailsComponent } from './components/details/details.component';
 import { OutgoingComponent } from './components/message/outgoing/outgoing.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { EditComponent } from './components/edit/edit.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     DetailsComponent,
     InboxComponent,
     OutgoingComponent,
+    EditComponent,
   ],
   imports: [
     BrowserModule,
