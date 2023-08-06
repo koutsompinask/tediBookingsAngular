@@ -43,7 +43,6 @@ export class EnlistComponent implements OnInit,AfterViewInit,OnDestroy{
     tiles.addTo(this.map);
     var markersGroup = L.layerGroup();
     this.map.addLayer(markersGroup);
-    console.log('init')
     
     this.map.on('click',(e) =>{
       var markersCount = markersGroup.getLayers().length;
@@ -101,14 +100,12 @@ export class EnlistComponent implements OnInit,AfterViewInit,OnDestroy{
   }
 
   onSubmit(){
-    console.log(this.coords,'before')
     if (!this.enlistForm.valid) return;
-    if (this.coords.length != 2) this.coords=[100,200]; 
     this.enlistRequest={
       name: this.enlistForm.get('name')?.value,
       location: this.enlistForm.get('location')?.value,
-      lat: this.coords[0],
-      lng: this.coords[1], 
+      lat: (this.coords.length != 2) ? null : this.coords[0],
+      lng: (this.coords.length != 2) ? null : this.coords[1], 
       transportation : this.enlistForm.get('transportation')?.value,
       availableFrom: this.enlistForm.get('availableFrom')?.value,
       availableTo: this.enlistForm.get('availableTo')?.value,
@@ -133,8 +130,7 @@ export class EnlistComponent implements OnInit,AfterViewInit,OnDestroy{
       photos: this.photosArray
     }
     this.accomServ.enlist(this.prepareFormData(this.enlistRequest)).subscribe( data => {
-      console.log(data);
-      this.router.navigate(['/home'])
+      this.router.navigate(['/hostAccs'])
     }, () => {
       alert('Enlistment Failed! Please try again');
     })

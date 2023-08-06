@@ -42,7 +42,17 @@ export class AuthService {
     }
 
     public logOut(){
-        this.localStorage.clear();
+        const logoutReq = {
+            refreshToken : this.getRefreshToken(),
+            username : this.getUsername()
+        }
+        this.http.post(`${this.apiUrl}/auth/logout`,logoutReq,{ responseType: 'text' })
+        .subscribe(data => {
+          console.log(data);
+        }, error => {
+          alert(error);
+        })
+        this.localStorage.clear()
         this.raiseUserEmitterEvent();
     }
 

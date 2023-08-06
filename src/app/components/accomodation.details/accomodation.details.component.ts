@@ -44,8 +44,7 @@ export class AccomodationDetailsComponent implements AfterViewInit,OnDestroy{
       this.acc.availableTo=new Date(this.acc.availableTo);
       this.canEdit=(this.authServ.getRole()?.indexOf('HOST')>=0 && this.acc.owner.username === this.authServ.getUsername());
       this.canBook=(this.authServ.getRole()?.indexOf('RENTER')>=0)
-      //console.log(this.authServ.getRole(),this.acc.owner.username)
-      if(this.acc.lat!=100) this.showMap=true;
+      if(this.acc.lat) this.showMap=true;
       const st:string[]=[];
       for (let s of data.photos){
         this.photoServ.getPhotoContent(s.filename).subscribe(
@@ -100,7 +99,9 @@ export class AccomodationDetailsComponent implements AfterViewInit,OnDestroy{
   }
 
   book(roomId: number){
-    if (this.from==null || this.to==null || this.numPerson==null) return; //to do add form   
+    if (this.from==null || this.to==null || this.numPerson==null) {
+      return; //to do add form
+    }
     const bookReq: BookingDto = {
       from : this.from,
       to : this.to
