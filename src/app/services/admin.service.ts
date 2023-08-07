@@ -21,4 +21,8 @@ export class AdminService{
         return this.http.get<User[]>(`${this.apiUrl}/admin/getAll`);
     }
 
+    public exportUsersJson(){
+        return this.http.get(`${this.apiUrl}/admin/download/users/json`);
+    }
+
 }

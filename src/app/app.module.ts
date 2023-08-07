@@ -29,6 +29,8 @@ import { DetailsComponent } from './components/details/details.component';
 import { OutgoingComponent } from './components/message/outgoing/outgoing.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { EditComponent } from './components/edit/edit.component';
+import { NgxStarRatingModule } from 'ngx-star-rating';
+import { ExportComponent } from './components/export/export.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,7 @@ import { EditComponent } from './components/edit/edit.component';
     InboxComponent,
     OutgoingComponent,
     EditComponent,
+    ExportComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,6 +66,7 @@ import { EditComponent } from './components/edit/edit.component';
     TooltipModule.forRoot(),
     SlickCarouselModule,
     NgxPaginationModule,
+    NgxStarRatingModule,
   ],
   providers: [
     {

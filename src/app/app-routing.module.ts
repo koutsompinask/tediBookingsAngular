@@ -16,6 +16,7 @@ import { InboxComponent } from './components/message/inbox/inbox.component';
 import { OutgoingComponent } from './components/message/outgoing/outgoing.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { EditComponent } from './components/edit/edit.component';
+import { ExportComponent } from './components/export/export.component';
 
 
 const appRoute: Routes = [
@@ -34,6 +35,7 @@ const appRoute: Routes = [
     {path: 'search', component: SearchComponent},
     {path: 'home', component: HomeComponent},
     {path: 'admin', component: AdminComponent},
+    {path: 'export', component: ExportComponent},
     {path: '**', component : ErrorComponent}
   ]
 

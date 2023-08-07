@@ -19,9 +19,15 @@
                 <div id="map"></div>
                 </div>
             </div>
-            <div>
+            <div class="mt-2">
             <p *ngIf="canBook">
             Owner: {{acc?.owner.username}}
+            <button class="btn btn-sm btn-kkout" data-bs-toggle="modal" data-bs-target="#ownerDetailsModal" (click)="getOwnerDetails()">
+                <i class="fa fa-eye" aria-hidden="true"></i>
+            </button>
+            <button class="btn btn-sm btn-kkout mx-1" data-bs-toggle="modal" data-bs-target="#sendMessageModal">
+                <i class="fa fa-commenting" aria-hidden="true"></i>
+            </button>
             </p>
             <p class="card-text">Price : {{acc?.price}} €</p>
             <p class="card-text">Extra Cost per Person : {{acc?.extraCost}} €</p>
@@ -36,17 +42,121 @@
             <p class="card-text">Type : {{acc?.type}}</p>
             <div *ngIf="acc?.wifi || acc?.sittingRoom || acc?.heat || acc?.kitchen || acc?.tv || acc?.parking || acc?.elevator">
             <h4>Extra Services:</h4>
-            <p *ngIf="acc?.wifi">Wifi</p>
-            <p *ngIf="acc?.sittingRoom">Sitting Room</p>
-            <p *ngIf="acc?.heat">Heat</p>
-            <p *ngIf="acc?.kitchen">Kitchen</p>
-            <p *ngIf="acc?.tv">Tv</p>
-            <p *ngIf="acc?.parking">Parking</p>
-            <p *ngIf="acc?.elevator">Elevator</p>
+            <p class="my-1" *ngIf="acc?.wifi">Wifi</p>
+            <p class="my-1" *ngIf="acc?.sittingRoom">Sitting Room</p>
+            <p class="my-1" *ngIf="acc?.heat">Heat</p>
+            <p class="my-1" *ngIf="acc?.kitchen">Kitchen</p>
+            <p class="my-1" *ngIf="acc?.tv">Tv</p>
+            <p class="my-1" *ngIf="acc?.parking">Parking</p>
+            <p class="my-1" *ngIf="acc?.elevator">Elevator</p>
+            <div class="row text-secondary" *ngIf="accRatings">
+                <div class="col-md-3"></div>
+                <div class="card text-secondary col-md-6">
+                    <h4>Accomodation Ratings:</h4>
+                    <p>Ratings : {{accRatings.length}} Average : {{getAvgRating(accRatings)}}</p>
+                    <p *ngFor="let r of accRatings | paginate: { itemsPerPage: tableSize, currentPage: page, totalItems: accRatings?.length }">
+                        <small>{{r.guest?.username}} :</small>
+                        <i class="fa fa-star" aria-hidden="true" *ngFor="let item of [].constructor(r.stars);"></i>
+                        <br>
+                        <small>Comment: {{r?.comment}}</small>
+                    </p>
+                    <div class="my-2">
+                        <pagination-controls class="text-secondary" (pageChange)="page = $event"></pagination-controls>
+                    </div>
+                </div>
+                <div class="col-md-3"></div>
             </div>
+        </div>
+        <button class="btn btn-kkout" *ngIf="canEdit" [routerLink]="['/editAccomodation']" [queryParams]="{id: acc.id}" >Edit</button>
+        <button class="btn btn-kkout" *ngIf="canBook" (click)="book(acc.id)" >Reserve</button>
+        <button class="btn btn-kkout" data-bs-toggle="modal" data-bs-target="#rateModal">Add Rating</button>
+    </div>
+</div>
+
+
+<div class="modal fade" id="ownerDetailsModal" tabindex="-1" aria-labelledby="ownerDetailsLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-secondary">
+                Owner Details
             </div>
-            <button class="btn btn-kkout" *ngIf="canEdit" [routerLink]="['/editAccomodation']" [queryParams]="{id: acc.id}" >Edit</button>
-            <button class="btn btn-kkout" *ngIf="canBook" (click)="book(acc.id)" >Reserve</button>
+            <div class="modal-body">
+            <p *ngIf="ownerProfilePic">
+                <img [src]="ownerProfilePic">
+            </p>
+            <p>
+                Username : {{acc?.owner.username}}
+            </p>
+            <p>
+                First name : {{acc?.owner.firstName}}
+            </p>
+            <p>
+                Last Name : {{acc?.owner.lastName}}
+            </p>
+            <p>
+                Email : {{acc?.owner.email}}
+            </p>
+            <p *ngIf="ownerRatings">
+                Ratings: {{ownerRatings.length}} Average Score : {{getAvgRating(ownerRatings)}} 
+            </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-kkout"  data-bs-toggle="modal" data-bs-target="#sendMessageModal" >Send Message</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="sendMessageModal" tabindex="-1" aria-labelledby="sendMessageLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-secondary">
+                Send Message to {{acc?.owner.username}}
+            </div>
+            <div class="modal-body">
+                <form class="form-control" [formGroup]="messageForm">
+                    <div class="form-group">
+                        <label class="text-secondary" for="reply">Message</label>
+                        <input type="text" class="form-control" id="reply" 
+                        placeholder="enter a message" formControlName="messageText">
+                    </div>
+                    <small class="text-danger" *ngIf="!messageForm.valid && (messageForm.touched || showError)">Message cant be empty</small>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-kkout" data-bs-dismiss="modal" (click)="message()">Send Message</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="rateModal" tabindex="-1" aria-labelledby="rateLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-secondary">
+                Rate Accomodation
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="rateForm">
+                    <div class="row form-group" id="rateGroup">
+                        <label class="text-secondary" for="rating">Rating: {{rateForm.get('rating')?.value}}</label>
+                        <div class="star-rating-container align-middle">
+                            <ngx-star-rating formControlName="rating" id="rating"></ngx-star-rating>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="text-secondary" for="comment">Comment</label>
+                        <input type="text" class="form-control" id="comment" 
+                        placeholder="enter a comment (optional)" formControlName="comment">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-kkout" data-bs-dismiss="modal" (click)="rateAcc()">Add Rating</button>
+            </div>
         </div>
     </div>
 </div>

@@ -19,3 +19,9 @@ img{
 #map {
     height: 100%;
 }
+
+.star-rating-container.align-middle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }

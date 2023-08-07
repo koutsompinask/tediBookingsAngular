@@ -14,7 +14,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let m of messages | paginate: { itemsPerPage: tableSize, currentPage: page, totalItems: messages?.length }">
-                <td class="col-7" [ngStyle]="{ 'font-weight': m.readFlag ? 'normal' : 'bold' }">
+                <td class="col-7">
                     {{m.message}}
                 </td>
                 <td  class="col-2">{{m.receiver.username}}</td>
