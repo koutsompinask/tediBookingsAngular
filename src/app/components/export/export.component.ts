@@ -29,4 +29,21 @@ export class ExportComponent{
     );
   }
 
+  exportUsersXml() {
+    this.adminService.exportUsersXml().subscribe(
+      (data) => {
+        const blob = new Blob([data], { type: 'application/xml' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'data.xml';
+        a.click();
+        window.URL.revokeObjectURL(url);
+      },
+      (error) => {
+        console.error('Error exporting data:', error);
+      }
+    );
+  }
+
 }

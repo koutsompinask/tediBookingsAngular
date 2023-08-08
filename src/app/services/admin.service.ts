@@ -25,4 +25,8 @@ export class AdminService{
         return this.http.get(`${this.apiUrl}/admin/download/users/json`);
     }
 
+    public exportUsersXml():Observable<any>{
+        return this.http.get(`${this.apiUrl}/admin/download/users/xml`,{ responseType: 'text' });
+    }
+
 }
