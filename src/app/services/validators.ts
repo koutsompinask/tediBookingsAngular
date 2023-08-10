@@ -29,7 +29,6 @@ export function dateSearchValidator():ValidatorFn{
         if (from == null && to == null) return null;
         if ((from == null && to != null) || (from!=null && to==null)) return { bothOrNone : true};   
         const now: Date = new Date();
-        console.log(now,from,to);
         if ( from > to ){
             return {fromAfterTo : true}
         }

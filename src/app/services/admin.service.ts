@@ -21,12 +21,12 @@ export class AdminService{
         return this.http.get<User[]>(`${this.apiUrl}/admin/getAll`);
     }
 
-    public exportUsersJson(){
-        return this.http.get(`${this.apiUrl}/admin/download/users/json`);
+    public exportAccomodationsJson(){
+        return this.http.get(`${this.apiUrl}/admin/download/accomodations/json`);
     }
 
-    public exportUsersXml():Observable<any>{
-        return this.http.get(`${this.apiUrl}/admin/download/users/xml`,{ responseType: 'text' });
+    public exportAccomodationsXml():Observable<any>{
+        return this.http.get(`${this.apiUrl}/admin/download/accomodations/xml`,{ responseType: 'text' });
     }
 
 }

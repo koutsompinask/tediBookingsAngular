@@ -16,4 +16,9 @@ export class UserService {
   getDetails():Observable<User>{
     return this.http.get<User>(`${this.apiUrl}/user/details`);
   }
+
+  updateDetails(fd : FormData){
+    return this.http.put(`${this.apiUrl}/user/update`,fd,{responseType: 'text'});
+  }
+
 }

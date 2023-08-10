@@ -54,12 +54,10 @@ export class SearchComponent implements OnInit{
       from : this.searchForm.get('dates.from')?.value,
       to : this.searchForm.get('dates.to')?.value
     }
-    console.log("GOING");
     this.accServ.getAllRooms(this.searchRequest).subscribe( data =>{
       this.searchResults=data;
-      console.log(data);
       for (let acc of this.searchResults){
-        if (acc.photos.length>0){
+        if (acc.photos?.length>0){
           this.phototServ.getPhotoContent(acc.photos[0].filename).subscribe(
             photoObject => 
             {

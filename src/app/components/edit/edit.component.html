@@ -1,15 +1,51 @@
-<div class="container" *ngIf="user">
-    <div class="card text-center">
-      <div class="card-image mt-5" *ngIf="profilePic">
-        <img [src]="profilePic">
-      </div>  
-      <div class="card-body" >
-        <p>Username:{{user.username}}</p>
-        <p>First Name:{{user.firstName}}</p>
-        <p>Last Name:{{user.lastName}}</p>
-        <p>E-mail:{{user.email}}</p>
-        <p>Role:{{user.role}}</p>
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-md-3"></div>
+      <div class="container col-md-6 p-4">
+          <h1 class="text-secondary text-center">Update Profile Details</h1>
+          <form [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                  <label class="text-secondary" for="username">Username</label>
+                  <input type="text" class="form-control" id="username" 
+                  formControlName="username" >
+              </div>
+              <div class="text-danger" *ngIf="!editUserForm.get('username')?.valid && editUserForm.get('username')?.touched">
+                  <small>Username can contain 3-20 alphanumeric chars (only letters A-Z, numbers and '_')</small>
+              </div>
+              <div class="form-group">
+                  <label class="text-secondary" for="photo">Add Profile Picture (overrides previous)</label>
+                  <input type="file" value="select" #selectFile (change)="onFileSelected($event)" class="form-control" id="photo" >
+              </div>
+              <div class=row>
+                  <div class="form-group col-md">
+                      <label class="text-secondary" for="firstName">First Name</label>
+                      <input type="text" class="form-control" id="firstName" 
+                       formControlName="firstName" >
+                  </div>
+                  <div class="form-group col-md">
+                      <label class="text-secondary" for="lastName">Last Name</label>
+                      <input type="text" class="form-control" id="lastName" 
+                      formControlName="lastName" >
+                  </div>
+              </div>
+              <div class="text-danger" 
+              *ngIf="(!editUserForm.get('firstName')?.valid && editUserForm.get('firstName')?.touched)
+                      || (!editUserForm.get('lastName')?.valid && editUserForm.get('lastName')?.touched)">
+                  <small>First name and last name must contain only letters (without spaces)</small>
+              </div>
+              <div class="form-group">
+                  <label class="text-secondary" for="userEmail">Email</label>
+                  <input type="email" class="form-control" id="userEmail" 
+                  formControlName="email">
+              </div>
+              <div class="text-danger" *ngIf="!editUserForm.get('email')?.valid && editUserForm.get('email')?.touched">
+                  <small>Please enter a valid Email</small>
+              </div>
+              <div class="text-center">
+                  <button type="submit" class="btn btn-lg btn-kkout mt-3">Update Details</button>
+              </div>
+          </form>
       </div>
-    </div>
+      <div class="col-md-3"></div>
   </div>
-  
+</div>

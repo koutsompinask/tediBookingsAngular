@@ -42,7 +42,7 @@ export class SignupComponent implements OnInit {
     this.registerRequest={
       username:this.signupForm.get('username')?.value,
       firstName:this.signupForm.get('firstName')?.value,
-      lastName:this.signupForm.get('firstName')?.value,
+      lastName:this.signupForm.get('lastName')?.value,
       email:this.signupForm.get('email')?.value,
       password:this.signupForm.get('passwordCreation.password')?.value,
       role:this.signupForm.get('role')?.value

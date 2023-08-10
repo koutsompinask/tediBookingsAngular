@@ -12,7 +12,7 @@ export class ExportComponent{
   constructor(private adminService: AdminService) { }
 
   exportUsersJson() {
-    this.adminService.exportUsersJson().subscribe(
+    this.adminService.exportAccomodationsJson().subscribe(
       (data) => {
         const json = JSON.stringify(data, null, 2);
         const blob = new Blob([json], { type: 'application/json' });
@@ -30,7 +30,7 @@ export class ExportComponent{
   }
 
   exportUsersXml() {
-    this.adminService.exportUsersXml().subscribe(
+    this.adminService.exportAccomodationsXml().subscribe(
       (data) => {
         const blob = new Blob([data], { type: 'application/xml' });
         const url = window.URL.createObjectURL(blob);
