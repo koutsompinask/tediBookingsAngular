@@ -1,3 +1,5 @@
+import { User } from "./user";
+
 export class Accomodation{
     id:number;
     name:string;
@@ -25,6 +27,6 @@ export class Accomodation{
 	tv:boolean;
 	parking:boolean;
 	elevator:boolean;
-    photos;
-    owner;
+    photos:any[];
+    owner:User;
 }

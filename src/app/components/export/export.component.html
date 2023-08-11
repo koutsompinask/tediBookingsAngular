@@ -1,4 +1,40 @@
-<button (click)="exportUsersJson()"> json
-</button>
-<button (click)="exportUsersXml()"> xml
-</button>
+<div class="container text-center p-3">
+    <h1 class="text-secondary">Export App Data</h1>
+    <table class="table m-sm-0">
+        <thead>
+            <tr>
+            <th scope="col"></th>
+            <th scope="col">XML</th>
+            <th scope="col">json</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr >
+            <th scope="row">Accomodations</th>
+            <td>
+                <button class="btn btn-kkout" (click)="exportAccomodationsJson()"> 
+                    json
+                </button>
+            </td>
+            <td>
+                <button class="btn btn-kkout" (click)="exportAccomodationsXml()"> 
+                    xml
+                </button>
+            </td>
+            </tr>
+            <tr >
+                <th scope="row">Bookings</th>
+                <td>
+                    <button class="btn btn-kkout" (click)="exportBookingsJson()"> 
+                        json
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-kkout" (click)="exportBookingsXml()"> 
+                        xml
+                    </button>
+                </td>
+                </tr>
+        </tbody>
+        </table>
+</div>

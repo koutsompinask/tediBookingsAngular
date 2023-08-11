@@ -29,4 +29,12 @@ export class AdminService{
         return this.http.get(`${this.apiUrl}/admin/download/accomodations/xml`,{ responseType: 'text' });
     }
 
+    public exportBookingsJson(){
+        return this.http.get(`${this.apiUrl}/admin/download/bookings/json`);
+    }
+
+    public exportBookingsXml():Observable<any>{
+        return this.http.get(`${this.apiUrl}/admin/download/bookings/xml`,{ responseType: 'text' });
+    }
+
 }

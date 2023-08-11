@@ -64,6 +64,7 @@ export class AccomodationDetailsComponent implements OnInit,AfterViewInit,OnDest
       comment : new FormControl(null)
     })
     this.accServ.getRoomById(this.accId).subscribe(data =>{
+      console.log(data);
       this.acc=data;
       this.acc.availableFrom=new Date(this.acc.availableFrom);
       this.acc.availableTo=new Date(this.acc.availableTo);
@@ -71,22 +72,22 @@ export class AccomodationDetailsComponent implements OnInit,AfterViewInit,OnDest
       this.canBook=(this.authServ.getRole()?.indexOf('RENTER')>=0)
       if(this.acc.lat) this.showMap=true;
       const st:string[]=[];
-      for (let s of data.photos){
-        this.photoServ.getPhotoContent(s.filename).subscribe(
-          (response: Blob) => {
-            // Convert the blob to a data URL
-            const reader = new FileReader();
-            reader.onloadend = () => {
-              st.push(reader.result as string);
-            };
-            reader.readAsDataURL(response);
-            this.photoUrls=st
-          },
-          error => {
-            console.error('Error fetching photo:', error);
-          }
-        );
-      }
+        for (let s of data.photos){
+          this.photoServ.getPhotoContent(s.filename).subscribe(
+            (response: Blob) => {
+              // Convert the blob to a data URL
+              const reader = new FileReader();
+              reader.onloadend = () => {
+                st.push(reader.result as string);
+              };
+              reader.readAsDataURL(response);
+              this.photoUrls=st
+            },
+            error => {
+              console.error('Error fetching photo:', error);
+            }
+          );
+        }
     });
     this.ratingService.getAccomodationRatings(this.accId).subscribe(
       data => {
