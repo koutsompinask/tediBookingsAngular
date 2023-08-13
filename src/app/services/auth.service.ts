@@ -7,6 +7,7 @@ import { LoginResponce } from "../dto/loginResponce"
 import { LocalStorageService } from "ngx-webstorage";
 import { map, tap } from "rxjs";
 import { User } from "../model/user";
+import { Router } from "@angular/router";
 
 @Injectable({
     providedIn: 'root'
@@ -20,7 +21,7 @@ export class AuthService {
         this.userEmitter.emit();
     }
 
-    constructor(private http : HttpClient ,private localStorage: LocalStorageService){
+    constructor(private http : HttpClient ,private localStorage: LocalStorageService,private router: Router){
     }
 
     public registerUser( user : FormData){
@@ -34,7 +35,6 @@ export class AuthService {
                 this.localStorage.store('authToken', data.authToken);
                 this.localStorage.store('username' , data.username);
                 this.localStorage.store('refreshToken', data.refreshToken);
-                this.localStorage.store('expiresAt',data.expiresAt);
                 this.localStorage.store('role',data.role);
                 this.localStorage.store('id',data.id);
                 this.raiseUserEmitterEvent();
@@ -42,16 +42,6 @@ export class AuthService {
     }
 
     public logOut(){
-        const logoutReq = {
-            refreshToken : this.getRefreshToken(),
-            username : this.getUsername()
-        }
-        this.http.post(`${this.apiUrl}/auth/logout`,logoutReq,{ responseType: 'text' })
-        .subscribe(data => {
-          console.log(data);
-        }, error => {
-          alert(error);
-        })
         this.localStorage.clear()
         this.raiseUserEmitterEvent();
     }
@@ -82,11 +72,12 @@ export class AuthService {
             username : this.getUsername()
         }
         this.localStorage.clear('authToken');
-        this.localStorage.clear('expiresAt');
         return this.http.post<LoginResponce>(`${this.apiUrl}/auth/refresh`,refreshTokenPayload)
             .pipe(tap(response => {
                 this.localStorage.store('authToken',response.authToken);
-                this.localStorage.store('expiresAt',response.expiresAt);
+            }, () => {
+                this.logOut();
+                this.router.navigate(['login'],{queryParams : {expired : true} })
             }));
     }
 

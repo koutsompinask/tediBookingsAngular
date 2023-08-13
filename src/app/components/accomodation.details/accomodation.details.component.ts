@@ -46,7 +46,7 @@ export class AccomodationDetailsComponent implements OnInit,AfterViewInit,OnDest
 
   constructor(private route: ActivatedRoute,private accServ: AccomodationsService,private photoServ:PhotoService,
     private authServ : AuthService,private bookServ:BookingsService,private router:Router,
-    private messageServ : MessageService,private renderer : Renderer2,private ratingService:RatingService){
+    private messageServ : MessageService,private ratingService:RatingService){
   }
 
   ngOnInit(): void {
