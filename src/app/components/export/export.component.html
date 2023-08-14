@@ -35,6 +35,32 @@
                     </button>
                 </td>
                 </tr>
+                <tr >
+                    <th scope="row">Ratings By Guest</th>
+                    <td>
+                        <button class="btn btn-kkout" (click)="exportGuestRatingsJson()"> 
+                            json
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-kkout" (click)="exportGuestRatingsXml()"> 
+                            xml
+                        </button>
+                    </td>
+                </tr>
+                <tr >
+                    <th scope="row">Ratings By Host</th>
+                    <td>
+                        <button class="btn btn-kkout" (click)="exportHostRatingsJson()"> 
+                            json
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-kkout" (click)="exportHostRatingsXml()"> 
+                            xml
+                        </button>
+                    </td>
+                </tr>    
         </tbody>
         </table>
 </div>

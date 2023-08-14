@@ -37,4 +37,20 @@ export class AdminService{
         return this.http.get(`${this.apiUrl}/admin/download/bookings/xml`,{ responseType: 'text' });
     }
 
+    public exportGuestRatingsJson(){
+        return this.http.get(`${this.apiUrl}/admin/download/ratings/guest/json`);
+    }
+
+    public exportGuestRatingsXml():Observable<any>{
+        return this.http.get(`${this.apiUrl}/admin/download/ratings/guest/xml`,{ responseType: 'text' });
+    }
+
+    public exportHostRatingsJson(){
+        return this.http.get(`${this.apiUrl}/admin/download/ratings/host/json`);
+    }
+
+    public exportHostRatingsXml():Observable<any>{
+        return this.http.get(`${this.apiUrl}/admin/download/ratings/host/xml`,{ responseType: 'text' });
+    }
+
 }
