@@ -9,8 +9,10 @@ import { AdminService } from 'src/app/services/admin.service';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit{
-
+  page: number =1;
+  tableSize: number = 10;
   users:User[];
+
   constructor(private adminServ : AdminService,private router : Router){}
 
   ngOnInit(): void {

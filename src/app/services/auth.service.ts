@@ -5,7 +5,7 @@ import { UserSignInDto } from "../dto/registerRequest";
 import { UserLogInDto } from "../dto/loginRequest";
 import { LoginResponce } from "../dto/loginResponce"
 import { LocalStorageService } from "ngx-webstorage";
-import { map, tap } from "rxjs";
+import { Observable, map, tap } from "rxjs";
 import { User } from "../model/user";
 import { Router } from "@angular/router";
 
@@ -24,9 +24,13 @@ export class AuthService {
     constructor(private http : HttpClient ,private localStorage: LocalStorageService,private router: Router){
     }
 
+    public checkUsernameExists( username : string ): Observable<boolean>{
+        return this.http.get<boolean>(`${this.apiUrl}/auth/checkUsername/${username}`);
+    } 
+
     public registerUser( user : FormData){
-        return this.http.post(`${this.apiUrl}/auth/signup`,user);
-      }
+        return this.http.post(`${this.apiUrl}/auth/signup`,user , {responseType : 'text'});
+    }
     
     public logIn( cred : UserLogInDto ) {
         this.localStorage.clear();

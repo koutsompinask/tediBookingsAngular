@@ -15,6 +15,9 @@ export class SignupComponent implements OnInit {
   signupForm : FormGroup;
   registerRequest : UserSignInDto;
   profilePic : photo;
+  showErrors : boolean = false;
+  userNameExists : boolean = false;
+  usernameChecked : string = '';
   
   constructor(private authService : AuthService, private router : Router){ }
 
@@ -27,8 +30,8 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
     this.signupForm = new FormGroup({
       username: new FormControl(null,[Validators.required,Validators.minLength(3),Validators.maxLength(20),charsDisallowedValidator(/\W/)]),
-      firstName: new FormControl(null,[Validators.required,Validators.minLength(3),Validators.maxLength(20),charsDisallowedValidator(/[^a-zA-Z]/)]),
-      lastName: new FormControl(null,[Validators.required,Validators.minLength(3),Validators.maxLength(20),charsDisallowedValidator(/[^a-zA-Z]/)]),
+      firstName: new FormControl(null,[Validators.required,Validators.maxLength(20),charsDisallowedValidator(/[^a-zA-Z]/)]),
+      lastName: new FormControl(null,[Validators.required,Validators.maxLength(20),charsDisallowedValidator(/[^a-zA-Z]/)]),
       email: new FormControl(null,[Validators.required,Validators.email]),
       passwordCreation: new FormGroup({
         password: new FormControl(null,[Validators.required,Validators.minLength(4),charsDisallowedValidator(/\s/)]),
@@ -39,22 +42,41 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit(){
-    this.registerRequest={
-      username:this.signupForm.get('username')?.value,
-      firstName:this.signupForm.get('firstName')?.value,
-      lastName:this.signupForm.get('lastName')?.value,
-      email:this.signupForm.get('email')?.value,
-      password:this.signupForm.get('passwordCreation.password')?.value,
-      role:this.signupForm.get('role')?.value
+    if (!this.signupForm.valid) {
+      console.log("Error in signup form");
+      this.showErrors=true;
+      return;
     }
-    console.log(this.prepareFormData(this.registerRequest));
-    this.authService.registerUser(this.prepareFormData(this.registerRequest)).subscribe( data => {
-      console.log(data);
-      this.router.navigate(['/home'],{queryParams: {registered : true}});
-    }, () => {
-      alert('Registration Failed! Please try again')
-    }
-    );
+    this.authService.checkUsernameExists(this.signupForm.get('username')?.value).subscribe(data => 
+      {
+        if (data) {
+          this.userNameExists=true;
+          this.usernameChecked=this.signupForm.get('username')?.value;
+          return;
+        }
+        this.registerRequest={
+          username:this.signupForm.get('username')?.value,
+          firstName:this.signupForm.get('firstName')?.value,
+          lastName:this.signupForm.get('lastName')?.value,
+          email:this.signupForm.get('email')?.value,
+          password:this.signupForm.get('passwordCreation.password')?.value,
+          role:this.signupForm.get('role')?.value
+        }
+        this.authService.registerUser(this.prepareFormData(this.registerRequest)).subscribe( data => {
+          console.log(data);
+          var queryParamsObj: Object = {'registered' : true};
+          if (this.signupForm.get('role')?.value.indexOf('HOST') >= 0) {
+            queryParamsObj = {'registered' : true,'waiting' : true}
+          }
+          this.router.navigate(['/home'], {queryParams : queryParamsObj} );
+        }, () => {
+          alert('Registration Failed! Please try again')
+        }
+        );
+      }, () => {
+        console.error("error in checking username");
+      }
+    )
   }
 
   onFileSelected(event){
