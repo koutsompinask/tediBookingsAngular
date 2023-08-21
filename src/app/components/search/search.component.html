@@ -44,19 +44,19 @@
     </div>
 </div>
 
-<div class="container py-3 my-2" *ngIf="searchResults">
+<div class="container py-3 my-2 text-center" *ngIf="searchResults">
+    <div class="my-2">
+        <pagination-controls class="text-secondary" (pageChange)="page = $event"></pagination-controls>
+    </div>
     <div class="row flex-wrap">
-        <div class="col-sm-6 d-flex" *ngFor="let acc of searchResults">
-            <div class="card mx-4 m-2 flex-grow-1">
+        <div class="col-sm-6 d-flex" *ngFor="let acc of searchResults | paginate: { itemsPerPage: tableSize, currentPage: page, totalItems: searchResults?.length }">
+            <div class="card m-2 flex-grow-1">
                 <img src="{{photos.get(acc.id)}}" class="card-img-top" alt="accomodation image">
                 <div class="card-body">
                     <h5 class="card-title">{{acc.name}}</h5>
-                    <p class="card-text">Floor: {{acc.floor}}</p>
                     <p class="card-text">Price Per Night: {{acc.price + acc.extraCost*searchForm.get('numPerson')?.value}}</p>
-                    <p class="card-text">Max Persons: {{acc.maxPerson}}</p>
-                    <p class="card-text">Location: {{acc.location}}</p>
-                    <p class="card-text">Wifi: {{acc.wifi}}</p>
-                    <p class="card-text">Heat: {{acc.heat}}</p>
+                    <p class="card-text">Accomodation Type : {{acc.type}}</p>
+                    <p class="card-text">Ratings: {{acc.ratings?.length}} Average : {{getAvg(acc.ratings)}}</p>
                     <p class="card-text">Room Size: {{acc.size}}</p>
                 </div>
                 <div class="card-footer">
@@ -71,5 +71,8 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="my-2">
+        <pagination-controls class="text-secondary" (pageChange)="page = $event"></pagination-controls>
     </div>
 </div>

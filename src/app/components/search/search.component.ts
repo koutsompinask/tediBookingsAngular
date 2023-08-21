@@ -5,6 +5,7 @@ import { BookingDto } from 'src/app/dto/bookingRequest';
 import { SearchDto } from 'src/app/dto/searchRequest';
 import { Accomodation } from 'src/app/model/accomodation';
 import { photo } from 'src/app/model/photo';
+import { Rating } from 'src/app/model/rating';
 import { User } from 'src/app/model/user';
 import { AccomodationsService } from 'src/app/services/accomodations.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -19,7 +20,8 @@ import { dateSearchValidator } from 'src/app/services/validators';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit{
-
+  page: number =1;
+  tableSize: number = 10;
   searchForm : FormGroup;
   searchRequest : SearchDto;
   searchResults : Accomodation[];
@@ -57,6 +59,7 @@ export class SearchComponent implements OnInit{
     this.accServ.getAllRooms(this.searchRequest).subscribe( data =>{
       this.searchResults=data;
       for (let acc of this.searchResults){
+        console.log(acc.ratings);
         if (acc.photos?.length>0){
           this.phototServ.getPhotoContent(acc.photos[0].filename).subscribe(
             photoObject => 
@@ -102,6 +105,16 @@ export class SearchComponent implements OnInit{
       alert('successful reservation!');
       this.router.navigate(['renterBooks']);
     })
+  }
+
+  getAvg(ratings : Rating[]){
+    if (!ratings) return '-';
+    if (ratings.length===0) return '-'
+    var sum=0;
+    for (let r of ratings){
+      sum=sum+r.stars;
+    }
+    return sum/ratings.length;
   }
 
 }

@@ -69,7 +69,7 @@
         </div>
         <button class="btn btn-kkout" *ngIf="canEdit" [routerLink]="['/editAccomodation']" [queryParams]="{id: acc.id}" >Edit</button>
         <button class="btn btn-kkout" *ngIf="canBook" (click)="book(acc.id)" >Reserve</button>
-        <button class="btn btn-kkout" data-bs-toggle="modal" data-bs-target="#rateModal">Add Rating</button>
+        <button class="btn btn-kkout" *ngIf="canBook" data-bs-toggle="modal" data-bs-target="#rateModal">Add Rating</button>
     </div>
 </div>
 
