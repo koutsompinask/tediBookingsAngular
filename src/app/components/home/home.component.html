@@ -7,6 +7,16 @@
     <strong>Registration succesful!</strong><br>
   </div>
   <div class="row">
+    <div class="col-md-3"></div>
+    <div class="container:find col-md-6 mb-4 text-center">
+      <button class="btn btn-info btn-lg p-5 text-center text-light" [routerLink]="['/search']">
+        Find Your Dream Accomodation
+        <i class="fa fa-search" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+  <div class="row">
     <div class="card col-sm-4 col-lg-3 mx-auto">
       <img class="card-img-top" src="/assets/booking.jpg" alt="bookking" />
       <div class="card-body">
@@ -46,16 +56,6 @@
         >
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-3"></div>
-    <div class="container:find col-md-6">
-      <button class="btn btn-info text-center text-light" [routerLink]="['/search']">
-        Find Your Dream Accomodation
-        <i class="fa fa-search" aria-hidden="true"></i>
-      </button>
-    </div>
-    <div class="col-md-3"></div>
   </div>
 </div>
 <app-details></app-details>
