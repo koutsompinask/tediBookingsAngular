@@ -1,5 +1,6 @@
 .container {
   background-color: rgb(220, 220, 158);
+  border-radius: 2%;
 }
 
 body {
@@ -18,4 +19,8 @@ body {
 .btn-kkout:hover {
   background-color: white;
   color: rgb(183, 184, 97);
+}
+
+textarea{
+  height: 150px; /* Set a minimum height for the textarea */
 }

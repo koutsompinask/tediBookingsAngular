@@ -13,6 +13,8 @@ import { MessageService } from 'src/app/services/message.service';
 import { RatingService } from 'src/app/services/rating.service';
 import { Rating } from 'src/app/model/rating';
 import { RatingDto } from 'src/app/dto/ratingRequest';
+import { dateSearchValidator } from 'src/app/services/validators';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-accomodation.details',
@@ -22,7 +24,6 @@ import { RatingDto } from 'src/app/dto/ratingRequest';
 export class AccomodationDetailsComponent implements OnInit,AfterViewInit,OnDestroy{
   accId:number;
   messageForm : FormGroup;
-  rateForm : FormGroup;
   showError : boolean =false;
   photoUrls : string[];
   acc : Accomodation;
@@ -43,6 +44,8 @@ export class AccomodationDetailsComponent implements OnInit,AfterViewInit,OnDest
   accRatings : Rating[];
   page: number =1;
   tableSize: number = 5;
+  bookForm:FormGroup;
+  invalidFormSubmit : boolean = false;
 
   constructor(private route: ActivatedRoute,private accServ: AccomodationsService,private photoServ:PhotoService,
     private authServ : AuthService,private bookServ:BookingsService,private router:Router,
@@ -56,21 +59,38 @@ export class AccomodationDetailsComponent implements OnInit,AfterViewInit,OnDest
       this.to = params['to'];
       this.numPerson = params['numPerson'];
     });
+    this.bookForm = new FormGroup({
+      numPerson: new FormControl(null,Validators.required),
+      dates: new FormGroup({
+        to: new FormControl(null,Validators.required),
+        from: new FormControl(null,Validators.required)
+      } , dateSearchValidator()
+      )
+    })
     this.messageForm= new FormGroup({
       messageText : new FormControl(null,Validators.required)
     });
-    this.rateForm = new FormGroup({
-      rating : new FormControl(null,[Validators.required,Validators.min(0),Validators.max(5)]),
-      comment : new FormControl(null)
-    })
     this.accServ.getRoomById(this.accId).subscribe(data =>{
-      console.log(data);
       this.acc=data;
       this.acc.availableFrom=new Date(this.acc.availableFrom);
       this.acc.availableTo=new Date(this.acc.availableTo);
       this.canEdit=(this.authServ.getRole()?.indexOf('HOST')>=0 && this.acc.owner.username === this.authServ.getUsername());
       this.canBook=(this.authServ.getRole()?.indexOf('RENTER')>=0)
       if(this.acc.lat) this.showMap=true;
+      this.bookForm = new FormGroup({
+        numPerson: new FormControl(this.numPerson,[Validators.required,Validators.max(this.acc.maxPerson)]),
+        dates: new FormGroup({
+          to: new FormControl(this.to,Validators.required),
+          from: new FormControl(this.from,Validators.required)
+        } , dateSearchValidator()
+        )
+      })
+      var today = new Date();
+      var min = today < this.acc.availableFrom ? this.acc.availableFrom.toISOString().split('T')[0] : today.toISOString().split('T')[0]; 
+      document.getElementById("DateFrom").setAttribute('min', min);
+      document.getElementById("DateTo").setAttribute('min', min);
+      document.getElementById("DateFrom").setAttribute('max', this.acc.availableTo.toISOString().split('T')[0]);
+      document.getElementById("DateTo").setAttribute('max', this.acc.availableTo.toISOString().split('T')[0]);
       const st:string[]=[];
         for (let s of data.photos){
           this.photoServ.getPhotoContent(s.filename).subscribe(
@@ -133,17 +153,22 @@ export class AccomodationDetailsComponent implements OnInit,AfterViewInit,OnDest
   }
 
   book(roomId: number){
-    if (this.from==null || this.to==null || this.numPerson==null) {
-      return; //to do add form
+    if (!this.bookForm.valid){
+      this.invalidFormSubmit=true;
+      return;
     }
     const bookReq: BookingDto = {
-      from : this.from,
-      to : this.to
+      from : this.bookForm.get('dates.from')?.value,
+      to : this.bookForm.get('dates.to')?.value
     };
     this.bookServ.bookRoom(roomId,bookReq).subscribe(data => {
       alert('successful reservation!');
       this.router.navigate(['renterBooks']);
-    })
+    }, (error) => {
+      if (error instanceof HttpErrorResponse
+        && error.status === 400)
+        alert('Sorry! Accomodation anavailable for these dates!');
+    });
   }
 
   message(){
@@ -157,10 +182,8 @@ export class AccomodationDetailsComponent implements OnInit,AfterViewInit,OnDest
     }
     this.messageServ.sendMessage(msg).subscribe(data => {
       alert(data);
-      //this.closeModal();
-      //this.router.navigate(['outgoing']);
     } , () => {
-      alert("error replying");
+      alert("error sending message");
     } )
   }
 
@@ -181,7 +204,6 @@ export class AccomodationDetailsComponent implements OnInit,AfterViewInit,OnDest
     this.ratingService.getHostRatings(this.acc.owner.id).subscribe(
       data => {
         this.ownerRatings=data;
-        console.log(data)
       }, 
       () => {
         alert("error fetching ratings");
@@ -197,18 +219,15 @@ export class AccomodationDetailsComponent implements OnInit,AfterViewInit,OnDest
     return sum/rat.length;
   }
 
-  rateAcc(){
-    const rateReq : RatingDto = {
-      stars: this.rateForm.get('rating')?.value,
-      comment: this.rateForm.get('comment')?.value
-    }
-    this.ratingService.rateAccomodation(rateReq,this.acc.id).subscribe(
-      data => {
-        alert(data);
-      },
-      () => {
-        alert("error on posting rating");
-      }
-    )
+  isValidDate(){
+    return (this.bookForm.get('dates')?.valid || 
+    !this.bookForm.get('dates.from')?.touched ||
+    !this.bookForm.get('dates.from')?.touched);
+  }
+
+  isDatesFilled(){
+    return (this.bookForm.get('dates')?.valid &&
+    this.bookForm.get('dates.from')?.touched &&
+    this.bookForm.get('dates.from')?.touched)
   }
 }

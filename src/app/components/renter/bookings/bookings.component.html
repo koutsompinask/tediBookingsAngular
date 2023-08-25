@@ -9,6 +9,7 @@
         <th scope="col">From</th>
         <th scope="col">To</th>
         <th scope="col">Cancel</th>
+        <th scope="col">Rate</th>
         </tr>
     </thead>
     <tbody>
@@ -21,7 +22,12 @@
         <td>{{dateConverter(b.from)}}</td>
         <td>{{dateConverter(b.to)}}</td>
         <td>
-            <button class="btn btn-sm btn-danger">
+            <button class="btn btn-sm btn-kkout" data-bs-toggle="modal" data-bs-target="#rateModal" (click)="rateId=b.accId">
+                Add Rating
+            </button>
+        </td>
+        <td>
+            <button class="btn btn-sm btn-danger" (click)="delete(b.id)">
                 Cancel Booking
             </button>
         </td>
@@ -29,4 +35,34 @@
         <tr>
     </tbody>
     </table>
+</div>
+
+
+<div class="modal fade" id="rateModal" tabindex="-1" aria-labelledby="rateLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-secondary">
+                Rate Accomodation
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="rateForm">
+                    <div class="row form-group" id="rateGroup">
+                        <label class="text-secondary" for="rating">Rating: {{rateForm.get('rating')?.value}}</label>
+                        <div class="star-rating-container align-middle">
+                            <ngx-star-rating formControlName="rating" id="rating"></ngx-star-rating>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="text-secondary" for="comment">Comment</label>
+                        <textarea type="text" class="form-control" id="comment" 
+                        placeholder="enter a comment (optional)" formControlName="comment"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-kkout" data-bs-dismiss="modal" (click)="rateAcc()">Add Rating</button>
+            </div>
+        </div>
+    </div>
 </div>

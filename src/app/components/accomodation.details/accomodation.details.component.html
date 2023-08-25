@@ -68,8 +68,7 @@
             </div>
         </div>
         <button class="btn btn-kkout" *ngIf="canEdit" [routerLink]="['/editAccomodation']" [queryParams]="{id: acc.id}" >Edit</button>
-        <button class="btn btn-kkout" *ngIf="canBook" (click)="book(acc.id)" >Reserve</button>
-        <button class="btn btn-kkout" *ngIf="canBook" data-bs-toggle="modal" data-bs-target="#rateModal">Add Rating</button>
+        <button class="btn btn-kkout" *ngIf="canBook" data-bs-toggle="modal" data-bs-target="#bookModal" >Reserve</button>
     </div>
 </div>
 
@@ -118,8 +117,8 @@
                 <form class="form-control" [formGroup]="messageForm">
                     <div class="form-group">
                         <label class="text-secondary" for="reply">Message</label>
-                        <input type="text" class="form-control" id="reply" 
-                        placeholder="enter a message" formControlName="messageText">
+                        <textarea type="text" class="form-control" id="reply" 
+                        placeholder="enter a message" formControlName="messageText"></textarea>
                     </div>
                     <small class="text-danger" *ngIf="!messageForm.valid && (messageForm.touched || showError)">Message cant be empty</small>
                 </form>
@@ -132,30 +131,51 @@
     </div>
 </div>
 
-<div class="modal fade" id="rateModal" tabindex="-1" aria-labelledby="rateLabel" aria-hidden="true">
+<div class="modal fade" id="bookModal" tabindex="-1" aria-labelledby="bookLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header text-secondary">
-                Rate Accomodation
+                Make a Reservation
             </div>
             <div class="modal-body">
-                <form [formGroup]="rateForm">
-                    <div class="row form-group" id="rateGroup">
-                        <label class="text-secondary" for="rating">Rating: {{rateForm.get('rating')?.value}}</label>
-                        <div class="star-rating-container align-middle">
-                            <ngx-star-rating formControlName="rating" id="rating"></ngx-star-rating>
+                <form [formGroup]="bookForm">
+                    <div formGroupName="dates">
+                        <div class="">
+                            <div class="mb-0">
+                                <label for="DateFrom" class="text-secondary form-label">From</label>
+                                <input type="date" class="form-control" id="DateFrom" formControlName="from">
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="mb-0">
+                                <label for="DateTo" class="text-secondary form-label">To</label>
+                                <input type="date" class="form-control" id="DateTo" formControlName="to">
+                            </div>
                         </div>
                     </div>
-                    <div class="row form-group">
-                        <label class="text-secondary" for="comment">Comment</label>
-                        <input type="text" class="form-control" id="comment" 
-                        placeholder="enter a comment (optional)" formControlName="comment">
+                    <small class="text-danger" *ngIf="!isValidDate()">
+                        Date to must be after from!
+                    </small>
+                    <div class="">
+                        <div class="mb-0">
+                            <label for="People" class="text-secondary form-label">Number of guests</label>
+                            <input type="number" class="form-control" id="People" formControlName="numPerson">
+                        </div>
+                        <small class="text-danger" *ngIf="!this.bookForm.get('numPerson')?.valid && this.bookForm.get('numPerson')?.touched">
+                            This accomodation can fit maximum {{acc.maxPerson}} people
+                        </small>
                     </div>
+                    <div *ngIf="acc!=null && this.bookForm!=null && this.bookForm.get('numPerson')!=null">
+                        Total Price : {{acc.price + acc.extraCost * this.bookForm.get('numPerson')?.value}} 
+                    </div>
+                    <small class="text-danger" [hidden]="!invalidFormSubmit">
+                        All fields are mandatory
+                    </small>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-kkout" data-bs-dismiss="modal" (click)="rateAcc()">Add Rating</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-kkout" data-bs-dismiss="modal" (click)="book(acc.id)">Book</button>
             </div>
         </div>
     </div>

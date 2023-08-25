@@ -30,6 +30,10 @@ export class MessageService {
     }
 
     reply(id : number,messageReq : MessageDto){
-        return this.http.post(`${this.apiUrl}/messages/reply/${id}`,messageReq,{responseType : 'text'})
+        return this.http.post(`${this.apiUrl}/messages/reply/${id}`,messageReq,{responseType : 'text'});
+    }
+
+    delete(id : number){
+        return this.http.delete(`${this.apiUrl}/messages/delete/${id}`,{responseType : 'text'});
     }
 }

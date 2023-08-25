@@ -19,5 +19,9 @@ export class BookingsService {
     getBookings(){
       return this.http.get<BookingResponceDto[]>(`${this.apiUrl}/book/getMine`);
     }
+
+    delete(id : number){
+      return this.http.delete(`${this.apiUrl}/book/delete/${id}`,{responseType : 'text'});
+    }
 }
   

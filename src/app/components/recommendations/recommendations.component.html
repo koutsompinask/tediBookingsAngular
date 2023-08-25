@@ -1,0 +1,37 @@
+<div class="container text-center my-2 pb-1">
+    <h1 class="text-secondary my-0 pt-4">
+        Welcome to TediBookings
+    </h1>
+    <div *ngIf="recommendations!=null">
+        <h4 class="text-secondary my-0 pt-4">
+            Recommended For You!
+        </h4>
+        <div class="fade-container" >
+            <div class="card-container">
+                <div class="card" *ngFor="let acc of recommendations">
+                    <img src="{{photos.get(acc.id)}}" class="card-img-top" alt="accomodation image">
+                <div class="card-body">
+                    <h5 class="card-title">{{acc.name}}</h5>
+                    <p class="card-text">Price Per Night: {{acc.price}}</p>
+
+                    <p class="card-text">Accomodation Type : {{acc.type}}</p>
+                    <!--<p class="card-text">Ratings: {{acc.ratings?.length}} Average : {{getAvg(acc.ratings)}}</p>-->
+                    <p class="card-text">Room Size: {{acc.size}}</p>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-kkout mx-2" [routerLink]="['/viewAccomodation']" [queryParams]="
+                    { 
+                        id : acc.id 
+                    }">View</button>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container:find my-4 text-center">
+        <button class="btn btn-info btn-lg px-5 py-4 text-center text-light" [routerLink]="['/search']">
+        Find Your Dream Accomodation
+        <i class="fa fa-search" aria-hidden="true"></i>
+        </button>
+    </div>
+</div>

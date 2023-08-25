@@ -1,0 +1,64 @@
+.card-container {
+    display: flex;
+    flex-wrap: nowrap; 
+    overflow-x: auto; 
+}
+
+.card {
+    flex: 0 0 auto; 
+    width: 300px; 
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 20px 10px;
+}
+
+.card-container::-webkit-scrollbar {
+    width: 5px;
+}
+  
+.card-container::-webkit-scrollbar-track {
+    background-color: rgb(220, 220, 158);
+}
+  
+.card-container::-webkit-scrollbar-thumb {
+    background-color: #d2aa6e; 
+    border-radius: 5px;
+    z-index: 2;
+}
+  
+.card-container::-webkit-scrollbar-thumb:hover {
+    background-color: #b88f4d; 
+}
+  
+.card-container::-webkit-scrollbar-thumb:active {
+    background-color: #996b36; 
+}
+
+.fade-container{
+    position: relative;
+}
+
+.fade-container::before,
+.fade-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 40px; 
+  background: linear-gradient(to left, rgba(255, 255, 255, 0), rgb(220, 220, 158));
+  pointer-events: none;
+  z-index: 0;
+}
+
+.fade-container::before {
+  left: 0;
+}
+
+.fade-container::after {
+  right: 0;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), rgb(220, 220, 158));
+}
+
+h1,h4{
+    font-family: "Lucida Handwriting" , "Brush Script MT", cursive;
+}

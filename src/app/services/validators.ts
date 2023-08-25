@@ -32,10 +32,10 @@ export function dateSearchValidator():ValidatorFn{
         if ( from > to ){
             return {fromAfterTo : true}
         }
-        else if (new Date(from)< now){
+        if (now > new Date(from)){
             return {beforeToday : true}
         }
-        else return null;
+        return null;
     }
 }
 

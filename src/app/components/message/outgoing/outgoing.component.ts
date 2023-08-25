@@ -18,6 +18,7 @@ export class OutgoingComponent implements OnInit{
   replyMessage : Message;
   conversation : Message[] = new Array();
   replyForm : FormGroup;
+  deleteMessage : Message;
   showError : Boolean = false;
 
   constructor(private messageServ : MessageService,private authServ : AuthService,private router: Router){}
@@ -28,7 +29,6 @@ export class OutgoingComponent implements OnInit{
     });
     this.messageServ.getOutgoing().subscribe(data => {
       this.messages=data;
-      console.log(data);
     } , () => {
       alert("error loading messages");
     })
@@ -59,7 +59,6 @@ export class OutgoingComponent implements OnInit{
       this.closeModal();
       this.messageServ.getOutgoing().subscribe(data => {
         this.messages=data;
-        console.log(data);
       } , () => {
         alert("error loading messages");
       })
@@ -91,6 +90,19 @@ export class OutgoingComponent implements OnInit{
       }
       document.body.classList.remove('modal-open'); // Restore scrolling on the body
     }
+  }
+
+  delete(id:number){
+    this.messageServ.delete(id).subscribe(data => {
+      alert(data);
+      this.messageServ.getOutgoing().subscribe(data => {
+        this.messages=data;
+      } , () => {
+        alert("error loading messages");
+      });
+    } , () => {
+      alert("error on deleting message!");
+    })
   }
 
 }

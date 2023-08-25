@@ -31,6 +31,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { EditComponent } from './components/edit/edit.component';
 import { NgxStarRatingModule } from 'ngx-star-rating';
 import { ExportComponent } from './components/export/export.component';
+import { RecommendationsComponent } from './components/recommendations/recommendations.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { ExportComponent } from './components/export/export.component';
     OutgoingComponent,
     EditComponent,
     ExportComponent,
+    RecommendationsComponent,
   ],
   imports: [
     BrowserModule,

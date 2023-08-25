@@ -19,6 +19,7 @@ export class InboxComponent implements OnInit{
   conversation : Message[] = new Array();
   replyForm : FormGroup;
   showError : Boolean = false;
+  deleteMessage : Message;
 
   constructor(private messageServ : MessageService,private authServ : AuthService,private router: Router){}
 
@@ -28,7 +29,6 @@ export class InboxComponent implements OnInit{
     });
     this.messageServ.getInbox().subscribe(data => {
       this.messages=data;
-      console.log(data);
     } , () => {
       alert("error loading messages");
     })
@@ -89,6 +89,19 @@ export class InboxComponent implements OnInit{
       }
       document.body.classList.remove('modal-open'); // Restore scrolling on the body
     }
+  }
+
+  delete(id:number){
+    this.messageServ.delete(id).subscribe(data => {
+      alert(data);
+      this.messageServ.getInbox().subscribe(data => {
+        this.messages=data;
+      } , () => {
+        alert("error loading messages");
+      })
+    } , () => {
+      alert("error on deleting message!");
+    });
   }
 
 }
