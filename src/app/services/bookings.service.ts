@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { environment } from "src/environments/kkout.env";
 import { BookingDto } from "../dto/bookingRequest";
 import { BookingResponceDto } from "../dto/bookingsResponce";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,10 @@ export class BookingsService {
 
     delete(id : number){
       return this.http.delete(`${this.apiUrl}/book/delete/${id}`,{responseType : 'text'});
+    }
+
+    checkBooked(id: number , bookingRequest : BookingDto):Observable<Boolean>{
+      return this.http.post<Boolean>(`${this.apiUrl}/book/check/${id}`,bookingRequest);
     }
 }
   

@@ -15,6 +15,7 @@ import { Rating } from 'src/app/model/rating';
 import { RatingDto } from 'src/app/dto/ratingRequest';
 import { dateSearchValidator } from 'src/app/services/validators';
 import { HttpErrorResponse } from '@angular/common/http';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-accomodation.details',
@@ -46,6 +47,7 @@ export class AccomodationDetailsComponent implements OnInit,AfterViewInit,OnDest
   tableSize: number = 5;
   bookForm:FormGroup;
   invalidFormSubmit : boolean = false;
+  unavailableDates:boolean = false;
 
   constructor(private route: ActivatedRoute,private accServ: AccomodationsService,private photoServ:PhotoService,
     private authServ : AuthService,private bookServ:BookingsService,private router:Router,
@@ -150,6 +152,21 @@ export class AccomodationDetailsComponent implements OnInit,AfterViewInit,OnDest
     var markersGroup = L.layerGroup();
     this.map.addLayer(markersGroup);
     var marker = L.marker(centroid,{icon: L.divIcon({className: 'poi', html: '<i class="text-danger fa-2x fa fa-thumb-tack" aria-hidden="true"></i>'})}).addTo(markersGroup);
+  }
+
+  checkBooked(){
+    if (!this.bookForm.get('dates')?.valid) return;
+    const bookReq: BookingDto = {
+      from : this.bookForm.get('dates.from')?.value,
+      to : this.bookForm.get('dates.to')?.value
+    };
+    this.bookServ.checkBooked(this.accId,bookReq).subscribe(data=>{
+      if (data) {
+        this.unavailableDates=true;
+      }else {
+        this.unavailableDates=false;
+      }
+    })
   }
 
   book(roomId: number){

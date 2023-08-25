@@ -58,7 +58,7 @@
                         <small>{{r.guest?.username}} :</small>
                         <i class="fa fa-star" aria-hidden="true" *ngFor="let item of [].constructor(r.stars);"></i>
                         <br>
-                        <small>Comment: {{r?.comment}}</small>
+                        <small *ngIf="r.comment != null">"{{r?.comment}}"</small>
                     </p>
                     <div class="my-2">
                         <pagination-controls class="text-secondary" (pageChange)="page = $event"></pagination-controls>
@@ -143,19 +143,22 @@
                         <div class="">
                             <div class="mb-0">
                                 <label for="DateFrom" class="text-secondary form-label">From</label>
-                                <input type="date" class="form-control" id="DateFrom" formControlName="from">
+                                <input type="date" class="form-control" id="DateFrom" formControlName="from" (change)="checkBooked()">
                             </div>
                         </div>
                         <div class="">
                             <div class="mb-0">
                                 <label for="DateTo" class="text-secondary form-label">To</label>
-                                <input type="date" class="form-control" id="DateTo" formControlName="to">
+                                <input type="date" class="form-control" id="DateTo" formControlName="to" (change)="checkBooked()">
                             </div>
                         </div>
                     </div>
                     <small class="text-danger" *ngIf="!isValidDate()">
                         Date to must be after from!
                     </small>
+                    <div class="alert alert-danger m-2" *ngIf="  unavailableDates">
+                        This accomodation is not available for these dates!
+                    </div>
                     <div class="">
                         <div class="mb-0">
                             <label for="People" class="text-secondary form-label">Number of guests</label>
