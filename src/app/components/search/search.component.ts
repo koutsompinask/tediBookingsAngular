@@ -47,7 +47,13 @@ export class SearchComponent implements OnInit{
     this.filterForm = new FormGroup({
       priceFrom: new FormControl(null,Validators.min(0)),
       priceTo : new FormControl(null,Validators.min(0)),
-      heat : new FormControl(false)
+      heat : new FormControl(false),
+      wifi : new FormControl(false),
+      tv : new FormControl(false),
+      parking : new FormControl(false),
+      kitchen : new FormControl(false),
+      elevator : new FormControl(false),
+      sittingRoom : new FormControl(false)
     })
     var today = new Date().toISOString().split('T')[0];
     document.getElementById("DateFrom").setAttribute('min', today);
@@ -132,6 +138,12 @@ export class SearchComponent implements OnInit{
     this.filters.set('priceFrom',this.filterForm.get('priceFrom')?.value);
     this.filters.set('priceTo',this.filterForm.get('priceTo')?.value);
     this.filters.set('heat',this.filterForm.get('heat')?.value);
+    this.filters.set('wifi',this.filterForm.get('wifi')?.value);
+    this.filters.set('tv',this.filterForm.get('tv')?.value);
+    this.filters.set('parking',this.filterForm.get('parking')?.value);
+    this.filters.set('kitchen',this.filterForm.get('kitchen')?.value);
+    this.filters.set('elevator',this.filterForm.get('elevator')?.value);
+    this.filters.set('sittingRoom',this.filterForm.get('sittingRoom')?.value);
     console.log(this.filters);
     var newFilteredResults : Accomodation[] = new Array();
     for (let acc of this.searchResults){
@@ -157,7 +169,32 @@ export class SearchComponent implements OnInit{
 
     if (this.filters.get('heat')==true && acc.heat==false)
       return false;
+    //else continue
     
+    if (this.filters.get('wifi')==true && acc.wifi==false)
+      return false;
+    //else continue
+    
+    if (this.filters.get('tv')==true && acc.tv==false)
+      return false;
+    //else continue
+
+    if (this.filters.get('parking')==true && acc.parking==false)
+      return false;
+    //else continue
+    
+    if (this.filters.get('kitchen')==true && acc.kitchen==false)
+      return false;
+    //else continue
+    
+    if (this.filters.get('elevator')==true && acc.elevator==false)
+      return false;
+
+    if (this.filters.get('sittingRoom')==true && acc.sittingRoom==false)
+      return false;
+    //else continue
+    
+
     //if we passed all filters
     return true;
 
