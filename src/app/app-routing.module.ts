@@ -17,25 +17,29 @@ import { OutgoingComponent } from './components/message/outgoing/outgoing.compon
 import { ProfileComponent } from './components/profile/profile.component';
 import { EditComponent } from './components/edit/edit.component';
 import { ExportComponent } from './components/export/export.component';
+import { AuthenticatedGuardService } from './services/auth-guard.service';
+import { HostGuardService } from './services/host-guard.service';
+import { AdminGuardService } from './services/admin-guard.service';
+import { RenterGuardService } from './services/renter-guard.service';
 
 
 const appRoute: Routes = [
     {path: '', redirectTo: 'home' , pathMatch: 'full'},
-    {path: 'hostAccs', component:AccomodationsComponent},
+    {path: 'hostAccs', component:AccomodationsComponent ,canActivate: [HostGuardService]},
     {path: 'viewAccomodation', component: AccomodationDetailsComponent},
-    {path: 'inbox', component: InboxComponent},
-    {path: 'outgoing', component: OutgoingComponent},
-    {path: 'viewProfile', component: ProfileComponent},
-    {path: 'editProfile', component: EditComponent},
-    {path: 'editAccomodation', component: EditAccomodationComponent},
-    {path: 'enlist',component : EnlistComponent},
-    {path: 'renterBooks', component: BookingsComponent},
+    {path: 'inbox', component: InboxComponent ,canActivate: [AuthenticatedGuardService]},
+    {path: 'outgoing', component: OutgoingComponent ,canActivate: [AuthenticatedGuardService]},
+    {path: 'viewProfile', component: ProfileComponent ,canActivate: [AuthenticatedGuardService]},
+    {path: 'editProfile', component: EditComponent ,canActivate: [AuthenticatedGuardService]},
+    {path: 'editAccomodation', component: EditAccomodationComponent ,canActivate: [HostGuardService]},
+    {path: 'enlist',component : EnlistComponent ,canActivate: [HostGuardService]},
+    {path: 'renterBooks', component: BookingsComponent ,canActivate: [RenterGuardService]},
     {path: 'signup', component: SignupComponent},
     {path: 'login', component: LoginComponent},
     {path: 'search', component: SearchComponent},
     {path: 'home', component: HomeComponent},
-    {path: 'admin', component: AdminComponent},
-    {path: 'export', component: ExportComponent},
+    {path: 'admin', component: AdminComponent ,canActivate: [AdminGuardService]},
+    {path: 'export', component: ExportComponent ,canActivate: [AdminGuardService]},
     {path: '**', component : ErrorComponent}
   ]
 

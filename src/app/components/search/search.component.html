@@ -45,11 +45,12 @@
 </div>
 
 <div class="container py-3 my-2 text-center" *ngIf="searchResults">
+    <button class="btn btn-kkout" data-bs-toggle="modal" data-bs-target="#filterModal" >Filter Results</button>
     <div class="my-2">
         <pagination-controls class="text-secondary" (pageChange)="page = $event"></pagination-controls>
     </div>
     <div class="row flex-wrap">
-        <div class="col-sm-6 d-flex" *ngFor="let acc of searchResults | paginate: { itemsPerPage: tableSize, currentPage: page, totalItems: searchResults?.length }">
+        <div class="col-sm-6 d-flex" *ngFor="let acc of filteredResults | paginate: { itemsPerPage: tableSize, currentPage: page, totalItems: searchResults?.length }">
             <div class="card m-2 flex-grow-1">
                 <img src="{{photos.get(acc.id)}}" class="card-img-top" alt="accomodation image">
                 <div class="card-body">
@@ -74,5 +75,40 @@
     </div>
     <div class="my-2">
         <pagination-controls class="text-secondary" (pageChange)="page = $event"></pagination-controls>
+    </div>
+</div>
+
+
+<div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-secondary">
+                Filter Results
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="filterForm">
+                    <h3 class="text-secondary">Filter pricing</h3>
+                    <div class="mb-0">
+                        <label for="priceFrom" class="text-secondary form-label">From</label>
+                        <input type="number" class="form-control" id="priceFrom" formControlName="priceFrom">
+                    </div>
+                    <div class="mb-0">
+                        <label for="priceTo" class="text-secondary form-label">To</label>
+                        <input type="number" class="form-control" id="priceTo" formControlName="priceTo">
+                    </div>
+                    <h3 class="text-secondary">Extra Services</h3>
+                    <div>
+                        <div class="mb-0 form-check">
+                            <input type="checkbox" class="form-check-input" id="heatCheck" formControlName="heat">
+                            <label class="form-check-label" for="heatCheck">Heat</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-kkout" data-bs-dismiss="modal" (click)="submitFilters()">Apply Filters</button>
+            </div>
+        </div>
     </div>
 </div>
