@@ -38,9 +38,10 @@ export class LoginComponent implements OnInit{
     };
 
     this.authServ.logIn(this.loginReq).subscribe(data => {
-      window.history.back();
+      if(this.expired) window.history.back();
+      else this.router.navigate(['/home'])
     }, (er) => {
-      alert('error login');
+      alert('invalid credentials');
       console.error(er);
     }
     );

@@ -64,6 +64,8 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "sslKey" : "privatekey.pem",
+          "sslCert" : "publickey.pem",
           "configurations": {
             "production": {
               "browserTarget": "tedi:build:production"
