@@ -72,7 +72,6 @@ export class EditAccomodationComponent implements OnDestroy{
     });
     this.accomServ.getRoomById(accId).subscribe(data =>{
       this.acc=data;
-      console.log(data);
       this.editForm = new FormGroup({
         name : new FormControl(this.acc.name,Validators.required),
         location : new FormControl(this.acc.location,Validators.required),
