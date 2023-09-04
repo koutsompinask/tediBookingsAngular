@@ -18,7 +18,7 @@
         <td>{{u.username}}</td>
         <td>{{u.role}}</td>
         <td>
-            <button class="btn btn-kkout" data-bs-toggle="modal" data-bs-target="#detailsModal" (click)="userView = u">
+            <button class="btn btn-kkout" data-bs-toggle="modal" data-bs-target="#detailsModal" (click)="viewUser(u)">
                 View Details
             </button>
         </td>
@@ -48,6 +48,7 @@
                     <p>E-mail:{{userView.email}}</p>
                     <p>Phone:{{userView.phone}}</p>
                     <p>Role:{{userView.role}}</p>
+                    <img [src]="profilePic" *ngIf="profilePic!=null">
                   </div>
             </div>
             <div class="modal-footer">
