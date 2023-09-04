@@ -72,6 +72,7 @@ export class EditAccomodationComponent implements OnDestroy{
     });
     this.accomServ.getRoomById(accId).subscribe(data =>{
       this.acc=data;
+      console.log(data);
       this.editForm = new FormGroup({
         name : new FormControl(this.acc.name,Validators.required),
         location : new FormControl(this.acc.location,Validators.required),
@@ -88,7 +89,9 @@ export class EditAccomodationComponent implements OnDestroy{
         maxPerson : new FormControl(this.acc.maxPerson,[Validators.required,charsDisallowedValidator(/[^0-9]/)]),
         accType : new FormControl(this.acc.type,Validators.required),
         description : new FormControl(this.acc.description),
-        houseRules: new FormControl(this.acc.houseRules),
+        smokingCheck: new FormControl(this.acc.smokingAllowed),
+        petsCheck: new FormControl(this.acc.petsAllowed),
+        eventsCheck: new FormControl(this.acc.eventsAllowed),
         sittingRoom : new FormControl(this.transBoolRev(this.acc.sittingRoom),Validators.required),
         wifi : new FormControl(this.transBoolRev(this.acc.wifi),Validators.required),
         heat : new FormControl(this.transBoolRev(this.acc.heat),Validators.required),
@@ -133,7 +136,9 @@ export class EditAccomodationComponent implements OnDestroy{
       maxPerson : new FormControl(null,[Validators.required,charsDisallowedValidator(/[^0-9]/)]),
       accType : new FormControl('HOTEL',Validators.required),
       description : new FormControl(null),
-      houseRules: new FormControl(null),
+      smokingCheck: new FormControl('false'),
+      petsCheck: new FormControl('false'),
+      eventsCheck: new FormControl('false'),
       sittingRoom : new FormControl('false',Validators.required),
       wifi : new FormControl('false',Validators.required),
       heat : new FormControl('false',Validators.required),
@@ -197,7 +202,9 @@ export class EditAccomodationComponent implements OnDestroy{
       maxPerson: this.editForm.get('maxPerson')?.value,
       type: this.editForm.get('accType')?.value,
       description: this.editForm.get('description')?.value,
-      houseRules:this.editForm.get('houseRules')?.value,
+      petsAllowed:this.editForm.get('petsCheck')?.value,
+      smokingAllowed:this.editForm.get('smokingCheck')?.value,
+      eventsAllowed:this.editForm.get('eventsCheck')?.value,
       sittingRoom : this.transBool(this.editForm.get('sittingRoom')?.value),
       wifi: this.transBool(this.editForm.get('wifi')?.value),
       heat: this.transBool(this.editForm.get('heat')?.value),

@@ -5,7 +5,7 @@
         <div class="col-10">
             <ngx-slick-carousel class="carousel card-img-top" #slickModal="slick-carousel" [config]="slideConfig">
                 <div ngxSlickItem *ngFor="let image of photoUrls">
-                    <img [src]="image" alt="img">
+                    <img [src]="image" alt="">
                 </div>
             </ngx-slick-carousel>
         </div>
@@ -13,43 +13,87 @@
     </div>
     <div class="text-center" >
         <div class="text-secondary">
-            <p class="card-text">Location : {{acc?.location}}</p>
-            <div class="map-container mt-0" id="locationMap" *ngIf="showMap">
-                <div class="map-frame">
-                <div id="map"></div>
-                </div>
+            <hr>
+            <div class="sizeInfo">
+                <h3>Size Information</h3>
+                <p class="card-text">Size : {{acc?.size}}</p>
+                <p class="card-text">Beds : {{acc?.beds}}</p>
+                <p class="card-text">Bedrooms : {{acc?.rooms}}</p>
+                <p class="card-text">Bathrooms : {{acc?.bathrooms}}</p>
+                <p class="card-text">Max Person : {{acc?.maxPerson}}</p>
+                <p class="card-text">Floor : {{acc?.floor}}</p>
+                <p class="card-text">Type : {{acc?.type}}</p>
+                <p class="card-text" *ngIf="acc?.sittingRoom">Sitting Room : yes</p>
+                <p class="card-text" *ngIf="!acc?.sittingRoom">Sitting Room : no</p>
             </div>
-            <div class="mt-2">
-            <p *ngIf="canBook">
-            Owner: {{acc?.owner.username}}
-            <button class="btn btn-sm btn-kkout" data-bs-toggle="modal" data-bs-target="#ownerDetailsModal" (click)="getOwnerDetails()">
-                <i class="fa fa-eye" aria-hidden="true"></i>
-            </button>
-            <button class="btn btn-sm btn-kkout mx-1" data-bs-toggle="modal" data-bs-target="#sendMessageModal">
-                <i class="fa fa-commenting" aria-hidden="true"></i>
-            </button>
-            </p>
-            <p class="card-text">Price : {{acc?.price}} €</p>
-            <p class="card-text">Extra Cost per Person : {{acc?.extraCost}} €</p>
-            <p class="card-text">Floor : {{acc?.floor}}</p>
-            <p class="card-text">Size : {{acc?.size}}</p>
-            <p class="card-text">Beds : {{acc?.beds}}</p>
-            <p class="card-text">Bedrooms : {{acc?.rooms}}</p>
-            <p class="card-text">Bathrooms : {{acc?.bathrooms}}</p>
-            <p class="card-text">Max Person : {{acc?.maxPerson}}</p>
-            <p class="card-text">Available From : {{acc?.availableFrom.toLocaleDateString()}}</p>
-            <p class="card-text">Available To : {{acc?.availableTo.toLocaleDateString()}}</p>
-            <p class="card-text">Type : {{acc?.type}}</p>
-            <div *ngIf="acc?.wifi || acc?.sittingRoom || acc?.heat || acc?.kitchen || acc?.tv || acc?.parking || acc?.elevator">
-            <h4>Extra Services:</h4>
-            <p class="my-1" *ngIf="acc?.wifi">Wifi</p>
-            <p class="my-1" *ngIf="acc?.sittingRoom">Sitting Room</p>
-            <p class="my-1" *ngIf="acc?.heat">Heat</p>
-            <p class="my-1" *ngIf="acc?.kitchen">Kitchen</p>
-            <p class="my-1" *ngIf="acc?.tv">Tv</p>
-            <p class="my-1" *ngIf="acc?.parking">Parking</p>
-            <p class="my-1" *ngIf="acc?.elevator">Elevator</p>
-            <div class="row text-secondary" *ngIf="accRatings">
+            <hr>
+            <div class="desc" *ngIf="acc?.description!=null">
+                <h3>Description</h3>
+                <p>{{acc.description}}</p>
+            </div>
+            <hr>
+            <div class="houseRules">
+                <h3>House Rules</h3>
+                <p class="card-text">
+                    Pets Allowed
+                    <i class="fa fa-check text-success" aria-hidden="true" *ngIf="acc?.petsAllowed"></i>
+                    <i class="fa fa-times text-danger" aria-hidden="true" *ngIf="!acc?.petsAllowed"></i>
+                </p>
+                <p class="card-text">
+                    Smoking Allowed
+                    <i class="fa fa-check text-success" aria-hidden="true" *ngIf="acc?.smokingAllowed"></i>
+                    <i class="fa fa-times text-danger" aria-hidden="true" *ngIf="!acc?.smokingAllowed"></i>
+                </p>
+                <p class="card-text">
+                    Evnets Allowed
+                    <i class="fa fa-check text-success" aria-hidden="true" *ngIf="acc?.eventsAllowed"></i>
+                    <i class="fa fa-times text-danger" aria-hidden="true" *ngIf="!acc?.eventsAllowed"></i>
+                </p>
+            </div>
+            <hr>
+            <div class="locationInfo">
+                <h3>Location</h3>
+                <div class="map-container mt-0" id="locationMap" *ngIf="showMap">
+                    <div class="map-frame">
+                    <div id="map"></div>
+                    </div>
+                </div>
+                <p>{{acc?.location}}</p>
+                <p *ngIf="acc?.transportation!=null">Transportation Info : {{acc.transportation}}</p>
+            </div>
+            <hr>
+            <div>
+                <h3>Host</h3>
+                <p>
+                    {{acc?.owner.username}}
+                    <button class="btn btn-sm btn-kkout" data-bs-toggle="modal" data-bs-target="#ownerDetailsModal" (click)="getOwnerDetails()">
+                        <i class="fa fa-eye" aria-hidden="true"></i>
+                    </button>
+                    <button class="btn btn-sm btn-kkout mx-1" data-bs-toggle="modal" data-bs-target="#sendMessageModal" *ngIf="canBook">
+                        <i class="fa fa-commenting" aria-hidden="true"></i>
+                    </button>
+                </p>
+            </div>
+            <hr>
+            <div class="bookingInfo">
+                <h3>Booking Info</h3>
+                <p class="card-text">Price : {{acc?.price}} €</p>
+                <p class="card-text">Extra Cost per Person : {{acc?.extraCost}} €</p>
+                <p class="card-text">Available From : {{acc?.availableFrom.toLocaleDateString()}}</p>
+                <p class="card-text">Available To : {{acc?.availableTo.toLocaleDateString()}}</p>
+            </div>
+            <hr>
+            <div class="extraServices" *ngIf="acc?.wifi || acc?.heat || acc?.kitchen || acc?.tv || acc?.parking || acc?.elevator">
+                <h3>Extra Services:</h3>
+                <p class="my-1" *ngIf="acc?.wifi">Wifi</p>
+                <p class="my-1" *ngIf="acc?.heat">Heat</p>
+                <p class="my-1" *ngIf="acc?.kitchen">Kitchen</p>
+                <p class="my-1" *ngIf="acc?.tv">Tv</p>
+                <p class="my-1" *ngIf="acc?.parking">Parking</p>
+                <p class="my-1" *ngIf="acc?.elevator">Elevator</p>
+                <hr>
+            </div>
+            <div class="ratings row text-secondary" *ngIf="accRatings">
                 <div class="col-md-3"></div>
                 <div class="card text-secondary col-md-6">
                     <h4>Accomodation Ratings:</h4>
@@ -101,7 +145,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-kkout"  data-bs-toggle="modal" data-bs-target="#sendMessageModal" >Send Message</button>
+                <button type="button" class="btn btn-kkout"  data-bs-toggle="modal" data-bs-target="#sendMessageModal" *ngIf="canBook" >Send Message</button>
             </div>
         </div>
     </div>

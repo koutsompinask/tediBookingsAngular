@@ -5,4 +5,5 @@ export class UserSignInDto {
     email: string;
     role : string;
     password: string;
+    phone: string;
 }

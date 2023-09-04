@@ -141,10 +141,22 @@
                     <textarea type="text" class="form-control" id="description" 
                     placeholder="create your description" formControlName="description" ></textarea>
                 </div>
-                <div class="form-group">
+                <div class="form-group text-secondary">
                     <label class="text-secondary" for="houseRules">House Rules</label>
-                    <textarea type="text" class="form-control" id="houseRules" 
-                    placeholder="declare your house rules (e.g. pets,smoking etc)" formControlName="houseRules" > </textarea>
+                    <div id="houseRules" class="row form-group mx-2">
+                        <div class="mb-0 form-check col">
+                            <input type="checkbox" class="form-check-input" id="petsCheck" formControlName="petsCheck">
+                            <label class="form-check-label" for="petsCheck">Pets Allowed</label>
+                        </div>
+                        <div class="mb-0 form-check col">
+                            <input type="checkbox" class="form-check-input" id="smokingCheck" formControlName="smokingCheck">
+                            <label class="form-check-label" for="smokingCheck">Smoking Allowed</label>
+                        </div>
+                        <div class="mb-0 form-check col">
+                            <input type="checkbox" class="form-check-input" id="eventsCheck" formControlName="eventsCheck">
+                            <label class="form-check-label" for="eventsCheck">Events Allowed</label>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <h5 class="my-2 text-secondary">Accomodation's extra services</h5> 

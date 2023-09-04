@@ -18,7 +18,9 @@ export class EnlistDto{
     maxPerson:number;
     type:string;
     description : string;
-    houseRules: string;
+    smokingAllowed : boolean;
+    petsAllowed : boolean;
+    eventsAllowed : boolean;
     sittingRoom: boolean;
     wifi:boolean;
 	heat:boolean;

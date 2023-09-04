@@ -45,6 +45,9 @@ export class SearchComponent implements OnInit{
       )
     })
     this.filterForm = new FormGroup({
+      hotel : new FormControl(true),
+      house : new FormControl(true),
+      appartment : new FormControl(true),
       priceFrom: new FormControl(null,Validators.min(0)),
       priceTo : new FormControl(null,Validators.min(0)),
       heat : new FormControl(false),
@@ -75,7 +78,6 @@ export class SearchComponent implements OnInit{
       this.searchResults = data;
       this.filteredResults = data;
       for (let acc of this.searchResults){
-        console.log(acc.ratings);
         if (acc.photos?.length>0){
           this.phototServ.getPhotoContent(acc.photos[0].filename).subscribe(
             photoObject => 
@@ -135,6 +137,9 @@ export class SearchComponent implements OnInit{
 
   submitFilters(){
     this.filters = new Map();
+    this.filters.set('hotel',this.filterForm.get('hotel')?.value);
+    this.filters.set('house',this.filterForm.get('house')?.value);
+    this.filters.set('appartment',this.filterForm.get('appartment')?.value);
     this.filters.set('priceFrom',this.filterForm.get('priceFrom')?.value);
     this.filters.set('priceTo',this.filterForm.get('priceTo')?.value);
     this.filters.set('heat',this.filterForm.get('heat')?.value);
@@ -144,7 +149,6 @@ export class SearchComponent implements OnInit{
     this.filters.set('kitchen',this.filterForm.get('kitchen')?.value);
     this.filters.set('elevator',this.filterForm.get('elevator')?.value);
     this.filters.set('sittingRoom',this.filterForm.get('sittingRoom')?.value);
-    console.log(this.filters);
     var newFilteredResults : Accomodation[] = new Array();
     for (let acc of this.searchResults){
       if (this.passesFilters(acc)) newFilteredResults.push(acc);
@@ -156,7 +160,18 @@ export class SearchComponent implements OnInit{
     //no filters
     if (this.filters==null) return true;
     //if we break a filter return false
-    console.log(this.filters.get('priceFrom'),(acc.price + acc.extraCost * this.searchRequest.numPerson))
+    const hotel = this.filters.get('hotel');
+    if (!hotel && acc.type==='HOTEL') return false;
+    //else continue
+
+    const house = this.filters.get('house');
+    if (!house && acc.type==='HOUSE') return false;
+    //else continue
+
+    const appartment = this.filters.get('appartment');
+    if (!appartment && acc.type==='APPARTMENT') return false;
+    //else continue
+
     const priceFromFilter = this.filters.get('priceFrom');
     if (priceFromFilter!=null && priceFromFilter > (acc.price + acc.extraCost * this.searchRequest.numPerson))
       return false;

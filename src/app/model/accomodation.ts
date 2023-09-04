@@ -18,7 +18,9 @@ export class Accomodation{
     maxPerson:number;
     type:string;
     description : string;
-    houseRules : string;
+    petsAllowed : boolean;
+    eventsAllowed : boolean;
+    smokingAllowed : boolean;
     availableFrom: Date;
     availableTo: Date;
     sittingRoom: boolean;

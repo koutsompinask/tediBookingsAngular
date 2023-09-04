@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit{
       window.history.back();
     }, (er) => {
       alert('error login');
-      console.log(er);
+      console.error(er);
     }
     );
   }

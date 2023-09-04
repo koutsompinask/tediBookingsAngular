@@ -50,13 +50,15 @@
         <pagination-controls class="text-secondary" (pageChange)="page = $event"></pagination-controls>
     </div>
     <div class="row flex-wrap">
-        <div class="col-sm-6 d-flex" *ngFor="let acc of filteredResults | paginate: { itemsPerPage: tableSize, currentPage: page, totalItems: searchResults?.length }">
+        <div class="col-sm-6 d-flex" *ngFor="let acc of filteredResults | paginate: { itemsPerPage: tableSize, currentPage: page, totalItems: filteredResults?.length }">
             <div class="card m-2 flex-grow-1">
-                <img src="{{photos.get(acc.id)}}" class="card-img-top" alt="accomodation image">
+                <img src="{{photos.get(acc.id)}}" class="card-img-top" alt="" *ngIf="photos.get(acc.id)!=null">
+                <img src="../../../assets/no-image-available.jpeg" class="card-img-top" alt="" *ngIf="photos.get(acc.id)==null">
                 <div class="card-body">
                     <h5 class="card-title">{{acc.name}}</h5>
                     <p class="card-text">Price Per Night: {{acc.price + acc.extraCost*searchForm.get('numPerson')?.value}}</p>
                     <p class="card-text">Accomodation Type : {{acc.type}}</p>
+                    <p class="card-text">Number of Beds : {{acc.beds}}</p>
                     <p class="card-text">Ratings: {{acc.ratings?.length}} Average : {{getAvg(acc.ratings)}}</p>
                     <p class="card-text">Room Size: {{acc.size}}</p>
                 </div>
@@ -87,14 +89,31 @@
             </div>
             <div class="modal-body">
                 <form [formGroup]="filterForm">
-                    <h3 class="text-secondary">Filter pricing</h3>
-                    <div class="mb-0">
-                        <label for="priceFrom" class="text-secondary form-label">From</label>
-                        <input type="number" class="form-control" id="priceFrom" formControlName="priceFrom">
+                    <h3 class="text-secondary">Accomodation Type</h3>
+                    <div class="row form-group mx-2">
+                        <div class="mb-0 form-check col">
+                            <input type="checkbox" class="form-check-input" id="hotelCheck" formControlName="hotel">
+                            <label class="form-check-label" for="hotelCheck">Hotel</label>
+                        </div>
+                        <div class="mb-0 form-check col">
+                            <input type="checkbox" class="form-check-input" id="houseCheck" formControlName="house">
+                            <label class="form-check-label" for="houseCheck">House</label>
+                        </div>
+                        <div class="mb-0 form-check col">
+                            <input type="checkbox" class="form-check-input" id="appartmentCheck" formControlName="appartment">
+                            <label class="form-check-label" for="appartmentCheck">Appartment</label>
+                        </div>
                     </div>
-                    <div class="mb-0">
-                        <label for="priceTo" class="text-secondary form-label">To</label>
-                        <input type="number" class="form-control" id="priceTo" formControlName="priceTo">
+                    <h3 class="text-secondary">Filter pricing</h3>
+                    <div class="row">
+                        <div class="mb-0 col" >
+                            <label for="priceFrom" class="text-secondary form-label">From</label>
+                            <input type="number" class="form-control" id="priceFrom" formControlName="priceFrom">
+                        </div>
+                        <div class="mb-0 col">
+                            <label for="priceTo" class="text-secondary form-label">To</label>
+                            <input type="number" class="form-control" id="priceTo" formControlName="priceTo">
+                        </div>
                     </div>
                     <h3 class="text-secondary">Extra Services</h3>
                     <div>
@@ -120,7 +139,7 @@
                         </div>
                         <div class="mb-0 form-check">
                             <input type="checkbox" class="form-check-input" id="sittingRoomCheck" formControlName="sittingRoom">
-                            <label class="form-check-label" for="sittingRoomCheck">Elevator</label>
+                            <label class="form-check-label" for="sittingRoomCheck">Sitting Room</label>
                         </div>
                     </div>
                 </form>

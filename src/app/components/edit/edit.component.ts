@@ -28,6 +28,7 @@ export class EditComponent implements OnInit{
         firstName: new FormControl(this.user.firstName,[Validators.required,Validators.minLength(3),Validators.maxLength(20),charsDisallowedValidator(/[^a-zA-Z]/)]),
         lastName: new FormControl(this.user.lastName,[Validators.required,Validators.minLength(3),Validators.maxLength(20),charsDisallowedValidator(/[^a-zA-Z]/)]),
         email: new FormControl(this.user.email,[Validators.required,Validators.email]),
+        phone: new FormControl(this.user.phone,[Validators.required,charsDisallowedValidator(/[^0-9]/)]),
       })
     })
     this.editUserForm = new FormGroup({
@@ -35,6 +36,7 @@ export class EditComponent implements OnInit{
       firstName: new FormControl(null,[Validators.required,Validators.minLength(3),Validators.maxLength(20),charsDisallowedValidator(/[^a-zA-Z]/)]),
       lastName: new FormControl(null,[Validators.required,Validators.minLength(3),Validators.maxLength(20),charsDisallowedValidator(/[^a-zA-Z]/)]),
       email: new FormControl(null,[Validators.required,Validators.email]),
+      phone: new FormControl(null,[Validators.required,charsDisallowedValidator(/[^0-9]/)]),
     })
   }
 
@@ -44,6 +46,7 @@ export class EditComponent implements OnInit{
       firstName:this.editUserForm.get('firstName')?.value,
       lastName:this.editUserForm.get('lastName')?.value,
       email:this.editUserForm.get('email')?.value,
+      phone:this.editUserForm.get('phone')?.value,
       role:null,
       password:null
     }

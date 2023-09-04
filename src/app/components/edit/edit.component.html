@@ -41,6 +41,14 @@
               <div class="text-danger" *ngIf="!editUserForm.get('email')?.valid && editUserForm.get('email')?.touched">
                   <small>Please enter a valid Email</small>
               </div>
+              <div class="form-group">
+                <label class="text-secondary" for="phone">Tel. Number</label>
+                <input type="text" class="form-control" id="phone" 
+                formControlName="phone">
+            </div>
+            <div class="text-danger" *ngIf="!editUserForm.get('phone')?.valid && editUserForm.get('phone')?.touched">
+                <small>Please enter a valid phone number (only numbers - no spaces)</small>
+            </div>
               <div class="text-center">
                   <button type="submit" class="btn btn-lg btn-kkout mt-3">Update Details</button>
               </div>

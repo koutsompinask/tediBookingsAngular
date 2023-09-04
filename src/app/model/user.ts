@@ -7,4 +7,5 @@ export class User{
     photoUrl: string;
     email: string;
     role : string;
+    phone : string;
 }

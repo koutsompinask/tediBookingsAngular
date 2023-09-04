@@ -6,20 +6,22 @@
     <thead>
         <tr>
         <th scope="col">Id</th>
-        <th scope="col">First Name</th>
-        <th scope="col">Last Name</th>
         <th scope="col">Username</th>
         <th scope="col">Role</th>
+        <th scope="col">View Details</th>
         <th scope="col">Waiting For Approval</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let u of users | paginate: { itemsPerPage: tableSize, currentPage: page, totalItems: users?.length }">
         <th scope="row">{{u.id}}</th>
-        <td>{{u.firstName}}</td>
-        <td>{{u.lastName}}</td>
         <td>{{u.username}}</td>
         <td>{{u.role}}</td>
+        <td>
+            <button class="btn btn-kkout" data-bs-toggle="modal" data-bs-target="#detailsModal" (click)="userView = u">
+                View Details
+            </button>
+        </td>
         <td *ngIf="!u.approved">
             <button class="btn btn-kkout" (click)="onApprove(u.id)">
                 Approve As Host
@@ -32,5 +34,25 @@
     </table>
     <div class="my-2">
         <pagination-controls class="text-secondary" (pageChange)="page = $event"></pagination-controls>
+    </div>
+</div>
+
+<div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-secondary">
+                <div class="card-body" *ngIf="userView != null">
+                    <p>Username:{{userView.username}}</p>
+                    <p>First Name:{{userView.firstName}}</p>
+                    <p>Last Name:{{userView.lastName}}</p>
+                    <p>E-mail:{{userView.email}}</p>
+                    <p>Phone:{{userView.phone}}</p>
+                    <p>Role:{{userView.role}}</p>
+                  </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
 </div>

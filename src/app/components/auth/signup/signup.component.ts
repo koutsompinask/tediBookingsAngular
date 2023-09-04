@@ -33,6 +33,7 @@ export class SignupComponent implements OnInit {
       firstName: new FormControl(null,[Validators.required,Validators.maxLength(20),charsDisallowedValidator(/[^a-zA-Z]/)]),
       lastName: new FormControl(null,[Validators.required,Validators.maxLength(20),charsDisallowedValidator(/[^a-zA-Z]/)]),
       email: new FormControl(null,[Validators.required,Validators.email]),
+      phone: new FormControl(null,[Validators.required,charsDisallowedValidator(/[^0-9]/)]),
       passwordCreation: new FormGroup({
         password: new FormControl(null,[Validators.required,Validators.minLength(4),charsDisallowedValidator(/\s/)]),
         passwordRep: new FormControl(null)
@@ -43,7 +44,6 @@ export class SignupComponent implements OnInit {
 
   onSubmit(){
     if (!this.signupForm.valid) {
-      console.log("Error in signup form");
       this.showErrors=true;
       return;
     }
@@ -60,10 +60,10 @@ export class SignupComponent implements OnInit {
           lastName:this.signupForm.get('lastName')?.value,
           email:this.signupForm.get('email')?.value,
           password:this.signupForm.get('passwordCreation.password')?.value,
-          role:this.signupForm.get('role')?.value
+          role:this.signupForm.get('role')?.value,
+          phone: this.signupForm.get('phone')?.value
         }
         this.authService.registerUser(this.prepareFormData(this.registerRequest)).subscribe( data => {
-          console.log(data);
           var queryParamsObj: Object = {'registered' : true};
           if (this.signupForm.get('role')?.value.indexOf('HOST') >= 0) {
             queryParamsObj = {'registered' : true,'waiting' : true}

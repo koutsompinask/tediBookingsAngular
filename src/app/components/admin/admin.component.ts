@@ -12,6 +12,7 @@ export class AdminComponent implements OnInit{
   page: number =1;
   tableSize: number = 10;
   users:User[];
+  userView : User = null;
 
   constructor(private adminServ : AdminService,private router : Router){}
 

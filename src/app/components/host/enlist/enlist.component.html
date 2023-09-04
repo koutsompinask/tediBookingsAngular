@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-3"></div>
-        <div class="container col-md-6 p-4">
+        <div class="col-lg-2"></div>
+        <div class="container col-lg-8 p-4">
             <h1 class="text-secondary text-center">Enlist an Accomodation</h1>
             <form [formGroup]="enlistForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
@@ -128,10 +128,22 @@
                     <textarea type="text" class="form-control" id="description" 
                     placeholder="create your description" formControlName="description" ></textarea>
                 </div>
-                <div class="form-group">
-                    <label class="text-secondary" for="houseRules">Description</label>
-                    <textarea type="text" class="form-control" id="houseRules" 
-                    placeholder="declare your house rules (e.g. pets,smoking etc)" formControlName="houseRules" ></textarea>
+                <div class="form-group text-secondary">
+                    <label class="text-secondary" for="houseRules">House Rules</label>
+                    <div id="houseRules" class="row form-group mx-2">
+                        <div class="mb-0 form-check col">
+                            <input type="checkbox" class="form-check-input" id="petsCheck" formControlName="petsCheck">
+                            <label class="form-check-label" for="petsCheck">Pets Allowed</label>
+                        </div>
+                        <div class="mb-0 form-check col">
+                            <input type="checkbox" class="form-check-input" id="smokingCheck" formControlName="smokingCheck">
+                            <label class="form-check-label" for="smokingCheck">Smoking Allowed</label>
+                        </div>
+                        <div class="mb-0 form-check col">
+                            <input type="checkbox" class="form-check-input" id="eventsCheck" formControlName="eventsCheck">
+                            <label class="form-check-label" for="eventsCheck">Events Allowed</label>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <h5 class="my-2 text-secondary">Accomodation's extra services</h5> 
@@ -221,6 +233,6 @@
                 </div>
             </form>
         </div>
-        <div class="col-md-3"></div>
+        <div class="col-lg-2"></div>
     </div>
 </div>

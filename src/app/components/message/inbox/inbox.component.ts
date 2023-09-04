@@ -36,7 +36,6 @@ export class InboxComponent implements OnInit{
 
   read(id : number){
     this.messageServ.read(id).subscribe(data => {
-      console.log(data);
       this.messages.map( msg => {
         if (msg.id === id) {
           this.conversation=[];

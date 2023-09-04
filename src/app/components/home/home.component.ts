@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class HomeComponent implements OnInit {
   waitingApproval: boolean = false;
   registered : boolean = false;
-  loggedIn : boolean = false;
+  loggedInRole : string = null;
 
   constructor(private elementRef: ElementRef, private renderer: Renderer2,private route : ActivatedRoute,private authService : AuthService) {}
 
@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
       this.waitingApproval = params['waiting'];
       this.registered = params['registered'];
     });
+    this.loggedInRole = this.authService.getRole();
   }
 
   scrollToElement(frag: string) {
