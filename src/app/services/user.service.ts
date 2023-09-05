@@ -21,4 +21,8 @@ export class UserService {
     return this.http.put(`${this.apiUrl}/user/update`,fd,{responseType: 'text'});
   }
 
+  changePassword(newPass : string){
+    return this.http.put(`${this.apiUrl}/user/changePass`,newPass,{responseType: 'text'})
+  }
+
 }

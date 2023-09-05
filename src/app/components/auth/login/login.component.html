@@ -2,6 +2,14 @@
     <strong>Session Expired!</strong> Please log-in again!
 </div>
 
+<div class="alert alert-warning" *ngIf="changedUsername">
+    <strong>Username Changed Successfully</strong> Please log-in again with your new username!
+</div>
+
+<div class="alert alert-warning" *ngIf="changedPassword">
+    <strong>Password Changed Successfully</strong> Please log-in again with your new password!
+</div>
+
 <div class="container-fluid">
     <div class = "row">
         <div class="col-sm-4"></div>

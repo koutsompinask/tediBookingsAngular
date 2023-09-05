@@ -13,6 +13,8 @@ export class LoginComponent implements OnInit{
   loginForm : FormGroup;
   loginReq : UserLogInDto;
   expired : boolean = false;
+  changedUsername : boolean = false;
+  changedPassword : boolean = false;
 
   constructor(private authServ:AuthService, private router: Router,private route: ActivatedRoute){
     this.loginReq={
@@ -28,6 +30,8 @@ export class LoginComponent implements OnInit{
     })
     this.route.queryParams.subscribe(params =>{
       this.expired = params['expired'];
+      this.changedUsername = params['changedUsername'];
+      this.changedPassword = params['changedPassword'];
     });
   }
 
@@ -39,6 +43,7 @@ export class LoginComponent implements OnInit{
 
     this.authServ.logIn(this.loginReq).subscribe(data => {
       if(this.expired) window.history.back();
+      else if (this.changedUsername) this.router.navigate(['/viewProfile'])
       else this.router.navigate(['/home'])
     }, (er) => {
       alert('invalid credentials');
