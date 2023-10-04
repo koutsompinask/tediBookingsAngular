@@ -34,8 +34,8 @@ export class EditAccomodationComponent implements OnDestroy{
   constructor(private accomServ:AccomodationsService,private router:Router,private route:ActivatedRoute,private photoServ: PhotoService){}
 
   private initMap(): void {
-    if (this.acc.lat) {
-      this.centroid=[this.acc.lat,this.acc.lng];
+    if (this.acc?.lat) {
+      this.centroid=[this.acc?.lat,this.acc?.lng];
     }
     this.map = L.map('map', {
       center: this.centroid,
